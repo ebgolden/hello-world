@@ -25,6 +25,15 @@ from theory_validator.theories.recursive_causal_diamond import (
 from theory_validator.theories.pure_relational_substrate import (
     PureRelationalSubstrate,
 )
+from theory_validator.theories.discrete_spectral_action import (
+    DiscreteSpectralAction,
+)
+from theory_validator.theories.causal_set_volume_law import (
+    CausalSetVolumeLaw,
+)
+from theory_validator.theories.octonionic_fisher_hypergraph import (
+    OctonionicFisherHypergraph,
+)
 
 
 GREEN = "\033[32m"
@@ -148,7 +157,10 @@ def main() -> int:
     uhft = UnifiedHolographicFramework()
     rcdc = RecursiveCausalDiamondCosmology()
     prs = PureRelationalSubstrate()
-    all_theories = EXISTING_THEORIES + [uhft, rcdc, prs]
+    dsa = DiscreteSpectralAction()
+    csvl = CausalSetVolumeLaw()
+    ofh = OctonionicFisherHypergraph()
+    all_theories = EXISTING_THEORIES + [uhft, rcdc, prs, dsa, csvl, ofh]
     candidate = rcdc  # the one whose verdict we summarize at the end
 
     print_matrix(all_theories, ALL_OBSERVATIONS)

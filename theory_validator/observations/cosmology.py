@@ -42,6 +42,56 @@ COSMOLOGY_OBSERVATIONS = [
         ),
     ),
     Observation(
+        key="tensor_to_scalar_ratio",
+        name="Primordial tensor-to-scalar ratio r",
+        domain="cosmology",
+        measured_value=0.0,
+        uncertainty=0.018,           # BICEP/Keck 2021 2-sigma bound = 0.036
+        tolerance_sigma=2.0,
+        description=(
+            "BICEP/Keck 2021: r < 0.036 (95% CL). Discriminates inflation "
+            "models and any theory predicting a specific tensor amplitude."
+        ),
+    ),
+    Observation(
+        key="cmb_lensing_amplitude",
+        name="CMB lensing amplitude A_L (Planck)",
+        domain="cosmology",
+        measured_value=1.180,
+        uncertainty=0.065,
+        tolerance_sigma=2.0,
+        description=(
+            "Phenomenological CMB lensing amplitude. Planck 2018 finds "
+            "A_L = 1.180 +/- 0.065 from the TTTEEE spectrum, where LCDM "
+            "predicts exactly 1.0. A ~ 2.8-sigma anomaly."
+        ),
+    ),
+    Observation(
+        key="fsigma8_z057",
+        name="Linear growth rate f*sigma_8 at z=0.57",
+        domain="cosmology",
+        measured_value=0.444,
+        uncertainty=0.038,
+        tolerance_sigma=2.0,
+        description=(
+            "BOSS DR12 redshift-space distortion measurement at z=0.57. "
+            "Planck-LCDM predicts ~ 0.48. RCDC's late-time growth "
+            "suppression must match this same number from one parameter."
+        ),
+    ),
+    Observation(
+        key="neff_relativistic_species",
+        name="Effective number of relativistic species N_eff",
+        domain="cosmology",
+        measured_value=2.99,
+        uncertainty=0.17,
+        tolerance_sigma=2.0,
+        description=(
+            "Planck 2018 N_eff. Standard 3-neutrino prediction is 3.044. "
+            "Sensitive to new relativistic degrees of freedom at recombination."
+        ),
+    ),
+    Observation(
         key="lithium_7_primordial",
         name="Primordial Li-7 abundance (Spite plateau)",
         domain="cosmology",

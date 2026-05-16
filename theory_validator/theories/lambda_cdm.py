@@ -32,6 +32,13 @@ class LambdaCDM(Theory):
             "sigma_8_lensing": Prediction(0.83, 0.016),
             # Standard BBN over-predicts Li-7 by a factor of ~ 3.
             "lithium_7_primordial": Prediction(-9.45, 0.05),
+            "cmb_lensing_amplitude": Prediction(1.0, 0.02),  # the A_L tension
+            "fsigma8_z057": Prediction(0.48, 0.02),
+            "neff_relativistic_species": Prediction(3.044, 0.02),
+            "tensor_to_scalar_ratio": Prediction(0.005, 0.005),
+            "equivalence_principle": Prediction(0.0, 0.0),
+            "photon_dispersion_LIV": Prediction(0.0, 0.0),
+            "gw_dispersion": Prediction(0.0, 0.0),
             "cmb_temperature": Prediction(2.7255, 0.001),
             "cmb_blackbody_shape": Prediction("blackbody"),
             "cmb_first_acoustic_peak": Prediction(220.0, 1.0),
@@ -76,6 +83,13 @@ class LambdaCDM(Theory):
             "hubble_local": "FAIL",       # the Hubble tension
             "sigma_8_lensing": "FAIL",    # the S8 tension
             "lithium_7_primordial": "FAIL",  # the lithium problem
+            "cmb_lensing_amplitude": "FAIL",
+            "fsigma8_z057": "PASS",
+            "neff_relativistic_species": "PASS",
+            "tensor_to_scalar_ratio": "PASS",
+            "equivalence_principle": "PASS",
+            "photon_dispersion_LIV": "PASS",
+            "gw_dispersion": "PASS",
             "cmb_temperature": "PASS",
             "cmb_blackbody_shape": "PASS",
             "cmb_first_acoustic_peak": "PASS",

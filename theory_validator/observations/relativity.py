@@ -98,4 +98,44 @@ RELATIVITY_OBSERVATIONS = [
             "gravitational shift predicted by relativity matches within errors."
         ),
     ),
+    Observation(
+        key="equivalence_principle",
+        name="Weak equivalence principle (MICROSCOPE)",
+        domain="relativity",
+        measured_value=0.0,         # Eotvos parameter eta
+        uncertainty=1.5e-14,
+        tolerance_sigma=1.0,
+        description=(
+            "MICROSCOPE Pt/Ti differential acceleration: |eta| < 1.5e-14. "
+            "Any theory with a long-range fifth force coupled to matter "
+            "composition fails this."
+        ),
+    ),
+    Observation(
+        key="photon_dispersion_LIV",
+        name="Lorentz invariance violation in photon dispersion",
+        domain="relativity",
+        # delta(v)/c at E = 100 GeV. Linear LIV (E/E_QG) with the Fermi-LAT
+        # GRB 090510 bound E_QG > 1.2e28 eV gives delta v/c < 8e-18 at 100 GeV.
+        measured_value=0.0,
+        uncertainty=8.3e-18,
+        tolerance_sigma=1.0,
+        description=(
+            "Fractional speed difference for 100 GeV photons compared to "
+            "low-energy light. Fermi-LAT GRB 090510: |dv/c| < 8.3e-18 at "
+            "the linear-LIV bound."
+        ),
+    ),
+    Observation(
+        key="gw_dispersion",
+        name="Gravitational-wave / light speed difference",
+        domain="relativity",
+        measured_value=0.0,
+        uncertainty=7.0e-16,
+        tolerance_sigma=1.0,
+        description=(
+            "GW170817 + GRB 170817A: |c_GW - c|/c < 7e-16. Falsifies "
+            "many scalar-tensor and Horndeski theories of dark energy."
+        ),
+    ),
 ]

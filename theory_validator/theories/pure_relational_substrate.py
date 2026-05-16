@@ -125,8 +125,11 @@ class PureRelationalSubstrate(Theory):
             "mercury_perihelion", "light_deflection_sun", "shapiro_delay",
             "gravitational_wave_strain", "gps_time_dilation",
             "michelson_morley", "ives_stilwell", "hafele_keating",
+            "equivalence_principle", "photon_dispersion_LIV", "gw_dispersion",
             # cosmology
             "hubble_local", "hubble_cmb", "sigma_8_lensing",
+            "cmb_lensing_amplitude", "fsigma8_z057",
+            "neff_relativistic_species", "tensor_to_scalar_ratio",
             "lithium_7_primordial", "cmb_temperature", "cmb_blackbody_shape",
             "cmb_first_acoustic_peak", "bbn_helium_fraction", "bao_scale",
             "supernova_time_dilation", "tolman_surface_brightness",

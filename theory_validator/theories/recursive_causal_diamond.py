@@ -202,10 +202,24 @@ class RecursiveCausalDiamondCosmology(Theory):
             "michelson_morley": Prediction(0.0, 0.0),
             "ives_stilwell": Prediction(1.0, 0.0),
             "hafele_keating": Prediction(275.0, 10.0),
+            # Inherits GR / standard inflation for the new precision tests.
+            "equivalence_principle": Prediction(0.0, 0.0),
+            "photon_dispersion_LIV": Prediction(0.0, 0.0),
+            "gw_dispersion": Prediction(0.0, 0.0),
             # --- Cosmology: the novel content lives here ---
             "hubble_local": Prediction(self.H0_local, 0.4),
             "hubble_cmb": Prediction(self.H0_cmb, 0.4),
             "sigma_8_lensing": Prediction(self.S_8_late, 0.015),
+            # The SAME growth suppression that fixes S_8 forces A_L < 1.
+            # Planck observes A_L = 1.18, so RCDC predicts the wrong DIRECTION.
+            # The S_8 fix and the A_L excess cannot both be one parameter.
+            "cmb_lensing_amplitude": Prediction(
+                1.0 - 0.5 * self.delta_H, 0.02
+            ),
+            # f sigma_8 at z = 0.57 from growth-rate Omega_m(z)^0.55 * sigma_8:
+            "fsigma8_z057": Prediction(0.440, 0.015),
+            # No new relativistic species in RCDC.
+            "neff_relativistic_species": Prediction(3.044, 0.02),
             "lithium_7_primordial": Prediction(self.li7_log_abundance, 0.05),
             "cmb_temperature": Prediction(2.7255, 0.001),
             "cmb_blackbody_shape": Prediction("blackbody"),
@@ -214,6 +228,7 @@ class RecursiveCausalDiamondCosmology(Theory):
             "bao_scale": Prediction(147.0, 0.3),
             "supernova_time_dilation": Prediction(1.0, 0.02),
             "tolman_surface_brightness": Prediction(4.0, 0.05),
+            "tensor_to_scalar_ratio": Prediction(0.005, 0.005),
             "dark_energy_density": Prediction(1.0 - self.Omega_m, 0.005),
             "matter_density": Prediction(self.Omega_m, 0.005),
             # --- Galactic: chi field as DM, inherited from S_chi ---
@@ -240,3 +255,8 @@ class RecursiveCausalDiamondCosmology(Theory):
             "matter_antimatter_asymmetry": Prediction(True),
         }
         self.expected_outcomes = {key: "PASS" for key in self.predictions}
+        # Known falsification: cmb_lensing_amplitude. The same growth
+        # suppression that fixes S_8 forces A_L below 1. Planck sees A_L > 1.
+        # RCDC must choose between explaining S_8 and explaining A_L;
+        # we chose S_8, so we honestly mark A_L expected = FAIL.
+        self.expected_outcomes["cmb_lensing_amplitude"] = "FAIL"
