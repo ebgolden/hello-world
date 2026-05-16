@@ -94,6 +94,8 @@ class DiscreteSpectralAction(Theory):
             "bullet_cluster_offset": Prediction(1.0, 0.1),
             "cluster_lensing_strength": Prediction(1.0, 0.1),
             "tully_fisher_slope": Prediction(3.5, 0.3),
+            # DSA's DM via right-handed Majorana neutrino: keV-GeV scale.
+            "fuzzy_dm_mass_bound": Prediction(4.0, 1.0),
             # Particle (post-revision values)
             "higgs_mass": Prediction(125.25, 4.0),     # Connes 2012 revision
             "electron_mass": Prediction(0.51099895, 1e-8),

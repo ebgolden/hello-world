@@ -236,6 +236,10 @@ class RecursiveCausalDiamondCosmology(Theory):
             "bullet_cluster_offset": Prediction(1.0, 0.05),
             "cluster_lensing_strength": Prediction(1.0, 0.05),
             "tully_fisher_slope": Prediction(4.0, 0.1),
+            # The chi field in RCDC is the dark sector but is *not*
+            # ultralight; effective mass set above ~ keV, far above the
+            # Lyman-alpha bound.
+            "fuzzy_dm_mass_bound": Prediction(3.0, 1.0),
             # --- Particle ---
             "higgs_mass": Prediction(self.m_higgs, 0.17),
             "electron_mass": Prediction(self.m_electron, 1e-8),

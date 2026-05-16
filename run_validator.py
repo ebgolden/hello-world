@@ -34,6 +34,9 @@ from theory_validator.theories.causal_set_volume_law import (
 from theory_validator.theories.octonionic_fisher_hypergraph import (
     OctonionicFisherHypergraph,
 )
+from theory_validator.theories.ultralight_coherent_dm import (
+    UltralightCoherentDM,
+)
 
 
 GREEN = "\033[32m"
@@ -160,7 +163,10 @@ def main() -> int:
     dsa = DiscreteSpectralAction()
     csvl = CausalSetVolumeLaw()
     ofh = OctonionicFisherHypergraph()
-    all_theories = EXISTING_THEORIES + [uhft, rcdc, prs, dsa, csvl, ofh]
+    ucdm = UltralightCoherentDM()
+    all_theories = EXISTING_THEORIES + [
+        uhft, rcdc, prs, dsa, csvl, ofh, ucdm,
+    ]
     candidate = rcdc  # the one whose verdict we summarize at the end
 
     print_matrix(all_theories, ALL_OBSERVATIONS)

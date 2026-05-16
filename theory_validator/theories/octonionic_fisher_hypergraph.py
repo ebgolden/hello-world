@@ -149,6 +149,8 @@ class OctonionicFisherHypergraph(Theory):
             "bullet_cluster_offset": Prediction(1.0, 0.05),
             "cluster_lensing_strength": Prediction(1.0, 0.05),
             "tully_fisher_slope": Prediction(4.0, 0.1),
+            # Octonion-orthogonal patterns: mass scale ~ GeV, well above bound.
+            "fuzzy_dm_mass_bound": Prediction(9.0, 1.0),
             # Particle (SM parameters from octonion construction)
             "higgs_mass": Prediction(self.m_higgs, 0.17),
             "electron_mass": Prediction(self.m_electron, 1e-8),

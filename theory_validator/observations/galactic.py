@@ -1,6 +1,14 @@
 """Galactic and astrophysical observations."""
 
-from ..observation import Observation
+from ..observation import Observation, Prediction
+
+
+def _lyman_alpha_check(obs: Observation, pred: Prediction) -> bool:
+    """One-sided lower bound: theory passes if predicted log10(m) is >= bound."""
+    if pred is None or pred.value is None:
+        return False
+    threshold = obs.measured_value - obs.tolerance_sigma * obs.uncertainty
+    return pred.value >= threshold
 
 
 GALACTIC_OBSERVATIONS = [
@@ -43,6 +51,23 @@ GALACTIC_OBSERVATIONS = [
             "Ratio of observed Einstein-radius strong-lensing convergence to "
             "the GR + dark matter prediction. Pure baryonic GR predicts ~0.2."
         ),
+    ),
+    Observation(
+        key="fuzzy_dm_mass_bound",
+        name="Lyman-alpha lower bound on ultralight DM mass",
+        domain="galactic",
+        # log10(m_phi / eV) lower bound. Rogers-Peiris 2021 (XQ-100 + HIRES/UVES):
+        # m_phi > 2e-21 eV at 95% CL.
+        measured_value=-20.7,        # log10(2e-21) = -20.7
+        uncertainty=0.3,
+        tolerance_sigma=1.0,
+        description=(
+            "Lower bound on ultralight scalar dark-matter mass from "
+            "small-scale Lyman-alpha forest flux power (Rogers-Peiris 2021). "
+            "Theory passes if predicted log10(m_phi/eV) >= -20.7 (i.e. mass "
+            "above the bound). Falsifies ultra-fuzzy DM models with m_phi < 2e-21 eV."
+        ),
+        checker=_lyman_alpha_check,
     ),
     Observation(
         key="tully_fisher_slope",

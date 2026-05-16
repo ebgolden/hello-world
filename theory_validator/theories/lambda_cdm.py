@@ -53,6 +53,8 @@ class LambdaCDM(Theory):
             "bullet_cluster_offset": Prediction(1.0, 0.1),
             "cluster_lensing_strength": Prediction(1.0, 0.1),
             "tully_fisher_slope": Prediction(3.5, 0.3),  # CDM gets the slope only roughly
+            # Cold DM: m_DM in MeV-GeV range, well above the Lyman-alpha bound.
+            "fuzzy_dm_mass_bound": Prediction(9.0, 0.5),  # log10(m/eV) ~ GeV
             # --- Particle (inherits SM) ---
             "higgs_mass": Prediction(125.25, 0.17),
             "electron_mass": Prediction(0.51099895, 1e-8),
@@ -103,6 +105,7 @@ class LambdaCDM(Theory):
             "bullet_cluster_offset": "PASS",
             "cluster_lensing_strength": "PASS",
             "tully_fisher_slope": "PASS",  # within 1.5 sigma of slope 4
+            "fuzzy_dm_mass_bound": "PASS",
             "higgs_mass": "PASS",
             "electron_mass": "PASS",
             "proton_electron_mass_ratio": "PASS",
