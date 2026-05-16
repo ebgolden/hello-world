@@ -4,15 +4,53 @@ from ..observation import Observation
 
 
 COSMOLOGY_OBSERVATIONS = [
+    # Two separate H0 tests at full precision. A single-valued theory of H0
+    # cannot satisfy both -- this is the actual Hubble tension.
     Observation(
-        key="hubble_constant",
-        name="Hubble constant H0",
+        key="hubble_local",
+        name="Local distance-ladder H0 (SH0ES)",
         domain="cosmology",
-        measured_value=70.0,        # km/s/Mpc, broad consensus value
-        uncertainty=3.0,            # widened to accommodate Planck vs SH0ES tension
+        measured_value=73.04,
+        uncertainty=1.04,
+        tolerance_sigma=2.0,
         description=(
-            "Present-day Hubble parameter. Planck CMB gives ~67.4, SH0ES "
-            "Cepheid-SN gives ~73.0; consensus band 70 +/- 3."
+            "SH0ES Cepheid + Type Ia supernova H0 (Riess+ 2022). Local rung."
+        ),
+    ),
+    Observation(
+        key="hubble_cmb",
+        name="CMB-inferred H0 (Planck 2018)",
+        domain="cosmology",
+        measured_value=67.36,
+        uncertainty=0.54,
+        tolerance_sigma=2.0,
+        description=(
+            "Planck 2018 H0 inferred from the CMB power spectrum assuming "
+            "flat LCDM. Sits ~ 5 sigma below the local SH0ES value."
+        ),
+    ),
+    Observation(
+        key="sigma_8_lensing",
+        name="Late-time S8 from weak lensing",
+        domain="cosmology",
+        measured_value=0.762,
+        uncertainty=0.024,
+        tolerance_sigma=2.0,
+        description=(
+            "KiDS-1000 / DES-Y3 weak-lensing S8 = sigma_8 sqrt(Omega_m/0.3). "
+            "Sits below the LCDM-from-CMB prediction (~0.83) at ~ 2-3 sigma."
+        ),
+    ),
+    Observation(
+        key="lithium_7_primordial",
+        name="Primordial Li-7 abundance (Spite plateau)",
+        domain="cosmology",
+        measured_value=-9.94,       # log10(Li/H)
+        uncertainty=0.06,
+        tolerance_sigma=2.0,
+        description=(
+            "Halo-star Li-7 abundance, log10(Li/H) ~ -9.94. Standard BBN with "
+            "Planck Omega_b predicts ~ -9.45 -- a factor of 3 excess."
         ),
     ),
     Observation(

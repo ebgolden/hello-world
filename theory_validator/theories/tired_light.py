@@ -22,7 +22,10 @@ class TiredLight(Theory):
             "ives_stilwell": Prediction(1.0, 0.0),
             "hafele_keating": Prediction(275.0, 10.0),
             # Cosmology: this is where tired-light fails hard.
-            "hubble_constant": Prediction(None),  # no expansion, no H0
+            "hubble_local": Prediction(None),
+            "hubble_cmb": Prediction(None),
+            "sigma_8_lensing": Prediction(None),
+            "lithium_7_primordial": Prediction(None),
             "cmb_temperature": Prediction(None),  # has to invoke ad-hoc thermalization
             "cmb_blackbody_shape": Prediction("distorted"),  # generic prediction
             "cmb_first_acoustic_peak": Prediction(None),
@@ -62,7 +65,10 @@ class TiredLight(Theory):
             "michelson_morley": "PASS",
             "ives_stilwell": "PASS",
             "hafele_keating": "PASS",
-            "hubble_constant": "FAIL",
+            "hubble_local": "FAIL",
+            "hubble_cmb": "FAIL",
+            "sigma_8_lensing": "FAIL",
+            "lithium_7_primordial": "FAIL",
             "cmb_temperature": "FAIL",
             "cmb_blackbody_shape": "FAIL",   # observed blackbody, predicted distorted
             "cmb_first_acoustic_peak": "FAIL",

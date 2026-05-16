@@ -21,8 +21,10 @@ class GeneralRelativity(Theory):
             "ives_stilwell": Prediction(1.0, 0.0),
             "hafele_keating": Prediction(275.0, 10.0),
             # --- Cosmology: GR alone does not pick out a model ---
-            # We give plain FRW + matter-only predictions, which fail.
-            "hubble_constant": Prediction(70.0, 5.0),    # consistent with FRW
+            "hubble_local": Prediction(None),
+            "hubble_cmb": Prediction(None),
+            "sigma_8_lensing": Prediction(None),
+            "lithium_7_primordial": Prediction(None),
             "cmb_temperature": Prediction(None),         # GR alone doesn't predict it
             "cmb_blackbody_shape": Prediction(None),
             "cmb_first_acoustic_peak": Prediction(None),
@@ -58,7 +60,10 @@ class GeneralRelativity(Theory):
             "michelson_morley": "PASS",
             "ives_stilwell": "PASS",
             "hafele_keating": "PASS",
-            "hubble_constant": "PASS",
+            "hubble_local": "FAIL",
+            "hubble_cmb": "FAIL",
+            "sigma_8_lensing": "FAIL",
+            "lithium_7_primordial": "FAIL",
             "cmb_temperature": "FAIL",
             "cmb_blackbody_shape": "FAIL",
             "cmb_first_acoustic_peak": "FAIL",

@@ -177,7 +177,13 @@ class UnifiedHolographicFramework(Theory):
             "ives_stilwell": Prediction(1.0, 0.0),
             "hafele_keating": Prediction(hk_ns, 10.0),
             # Cosmology
-            "hubble_constant": Prediction(self.H0, 1.0),
+            # UHFT's holographic regulator picks a single H0; it has no
+            # mechanism to make local- vs CMB-inferred H0 differ. The two
+            # high-precision tests therefore falsify it.
+            "hubble_local": Prediction(self.H0, 0.5),
+            "hubble_cmb": Prediction(self.H0, 0.5),
+            "sigma_8_lensing": Prediction(0.83, 0.02),       # follows LCDM
+            "lithium_7_primordial": Prediction(-9.45, 0.05), # follows LCDM
             "cmb_temperature": Prediction(T_cmb, 0.001),
             "cmb_blackbody_shape": Prediction("blackbody"),
             "cmb_first_acoustic_peak": Prediction(l_peak, 1.0),

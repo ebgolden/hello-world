@@ -25,7 +25,11 @@ class MOND(Theory):
             "ives_stilwell": Prediction(1.0, 0.0),
             "hafele_keating": Prediction(275.0, 10.0),
             # Cosmology: MOND alone doesn't give the LCDM cosmology cleanly.
-            "hubble_constant": Prediction(70.0, 5.0),
+            # No clean MOND prediction for the H0 tension.
+            "hubble_local": Prediction(None),
+            "hubble_cmb": Prediction(None),
+            "sigma_8_lensing": Prediction(None),
+            "lithium_7_primordial": Prediction(None),
             "cmb_temperature": Prediction(2.7255, 0.01),  # accepts standard thermal history
             "cmb_blackbody_shape": Prediction("blackbody"),
             # First peak: TeVeS struggles to fit the third peak and overall ratios.
@@ -60,7 +64,10 @@ class MOND(Theory):
             "michelson_morley": "PASS",
             "ives_stilwell": "PASS",
             "hafele_keating": "PASS",
-            "hubble_constant": "PASS",
+            "hubble_local": "FAIL",
+            "hubble_cmb": "FAIL",
+            "sigma_8_lensing": "FAIL",
+            "lithium_7_primordial": "FAIL",
             "cmb_temperature": "PASS",
             "cmb_blackbody_shape": "PASS",
             "cmb_first_acoustic_peak": "PASS",

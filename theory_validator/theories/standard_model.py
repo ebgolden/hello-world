@@ -33,6 +33,11 @@ class StandardModel(Theory):
             # (the gauge sector is built on SR but doesn't predict orbital effects).
             "michelson_morley": Prediction(0.0, 0.0),
             "ives_stilwell": Prediction(1.0, 0.0),
+            # SM has no cosmology -- explicit None for the new tests.
+            "hubble_local": Prediction(None),
+            "hubble_cmb": Prediction(None),
+            "sigma_8_lensing": Prediction(None),
+            "lithium_7_primordial": Prediction(None),
         }
         self.expected_outcomes = {
             "mercury_perihelion": "FAIL",
@@ -43,7 +48,10 @@ class StandardModel(Theory):
             "michelson_morley": "PASS",
             "ives_stilwell": "PASS",
             "hafele_keating": "FAIL",
-            "hubble_constant": "FAIL",
+            "hubble_local": "FAIL",
+            "hubble_cmb": "FAIL",
+            "sigma_8_lensing": "FAIL",
+            "lithium_7_primordial": "FAIL",
             "cmb_temperature": "FAIL",
             "cmb_blackbody_shape": "FAIL",
             "cmb_first_acoustic_peak": "FAIL",

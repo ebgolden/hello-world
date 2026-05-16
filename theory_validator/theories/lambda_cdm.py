@@ -24,9 +24,14 @@ class LambdaCDM(Theory):
             "ives_stilwell": Prediction(1.0, 0.0),
             "hafele_keating": Prediction(275.0, 10.0),
             # --- Cosmology ---
-            # Planck H0 is ~67.4 +/- 0.5 -- sits at the low edge of the consensus
-            # band; with the broader uncertainty in our observation, it passes.
-            "hubble_constant": Prediction(67.4, 0.5),
+            # LCDM gives a single H0 (Planck value ~ 67.36); it cannot also fit
+            # the local SH0ES value 73.04 -- this is the Hubble tension.
+            "hubble_cmb": Prediction(67.36, 0.54),
+            "hubble_local": Prediction(67.36, 0.54),
+            # LCDM-from-CMB predicts S8 ~ 0.83, in tension with weak lensing.
+            "sigma_8_lensing": Prediction(0.83, 0.016),
+            # Standard BBN over-predicts Li-7 by a factor of ~ 3.
+            "lithium_7_primordial": Prediction(-9.45, 0.05),
             "cmb_temperature": Prediction(2.7255, 0.001),
             "cmb_blackbody_shape": Prediction("blackbody"),
             "cmb_first_acoustic_peak": Prediction(220.0, 1.0),
@@ -67,7 +72,10 @@ class LambdaCDM(Theory):
             "michelson_morley": "PASS",
             "ives_stilwell": "PASS",
             "hafele_keating": "PASS",
-            "hubble_constant": "PASS",
+            "hubble_cmb": "PASS",
+            "hubble_local": "FAIL",       # the Hubble tension
+            "sigma_8_lensing": "FAIL",    # the S8 tension
+            "lithium_7_primordial": "FAIL",  # the lithium problem
             "cmb_temperature": "PASS",
             "cmb_blackbody_shape": "PASS",
             "cmb_first_acoustic_peak": "PASS",

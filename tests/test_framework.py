@@ -9,6 +9,12 @@ from theory_validator.theories import EXISTING_THEORIES
 from theory_validator.theories.unified_holographic_framework import (
     UnifiedHolographicFramework,
 )
+from theory_validator.theories.recursive_causal_diamond import (
+    RecursiveCausalDiamondCosmology,
+)
+from theory_validator.theories.pure_relational_substrate import (
+    PureRelationalSubstrate,
+)
 
 
 def test_unique_observation_keys():
@@ -64,13 +70,44 @@ def test_existing_theory_matches_documented_expectations(theory):
     )
 
 
-def test_candidate_theory_passes_full_suite():
-    """The candidate Unified Holographic Field Theory must pass every test
-    in the suite to remain unfalsified."""
-    candidate = UnifiedHolographicFramework()
+def test_rcdc_passes_full_suite():
+    """RCDC (speculation-with-structure) must pass every test in the suite.
+    If it ever fails, the theory has been falsified."""
+    candidate = RecursiveCausalDiamondCosmology()
     failures = []
     for obs in ALL_OBSERVATIONS:
         r = run_one(candidate, obs)
         if not r.passed:
             failures.append((obs.key, r.reason))
-    assert not failures, f"UHFT falsified by: {failures}"
+    assert not failures, f"RCDC falsified by: {failures}"
+
+
+def test_uhft_falsified_by_tightened_tests():
+    """UHFT (post-hoc curve fit) is *expected* to fail the tightened H0,
+    S8, and Li-7 tests. If it stops failing them, either UHFT was edited
+    or the tests were loosened -- both are worth flagging."""
+    uhft = UnifiedHolographicFramework()
+    expected_failures = {
+        "hubble_local", "hubble_cmb",
+        "sigma_8_lensing", "lithium_7_primordial",
+    }
+    actually_failed = {
+        obs.key for obs in ALL_OBSERVATIONS
+        if not run_one(uhft, obs).passed
+    }
+    assert expected_failures.issubset(actually_failed), (
+        f"UHFT no longer falsified by: "
+        f"{expected_failures - actually_failed}"
+    )
+
+
+def test_prs_calibration():
+    """PRS (rethink-from-scratch) is honestly underspecified -- it should
+    fail most tests because the coarse-graining derivations don't exist.
+    The calibration check must agree."""
+    prs = PureRelationalSubstrate()
+    mismatches = [
+        obs.key for obs in ALL_OBSERVATIONS
+        if not run_one(prs, obs).expectation_met
+    ]
+    assert not mismatches, f"PRS calibration drifted: {mismatches}"

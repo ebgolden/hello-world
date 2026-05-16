@@ -19,6 +19,12 @@ from theory_validator.theories import EXISTING_THEORIES
 from theory_validator.theories.unified_holographic_framework import (
     UnifiedHolographicFramework,
 )
+from theory_validator.theories.recursive_causal_diamond import (
+    RecursiveCausalDiamondCosmology,
+)
+from theory_validator.theories.pure_relational_substrate import (
+    PureRelationalSubstrate,
+)
 
 
 GREEN = "\033[32m"
@@ -132,8 +138,18 @@ def candidate_verdict(candidate, observations) -> int:
 
 
 def main() -> int:
-    candidate = UnifiedHolographicFramework()
-    all_theories = EXISTING_THEORIES + [candidate]
+    # Three candidate styles, demonstrating the trilemma:
+    #   UHFT -- post-hoc curve fit (passes by construction, falsified by
+    #           the tightened tests we added)
+    #   RCDC -- speculation-with-structure (one new parameter, claimed
+    #           derivations for the four open tensions)
+    #   PRS  -- rethink-from-scratch (drops continuum + fields + Lagrangian;
+    #           passes very few tests because derivations don't yet exist)
+    uhft = UnifiedHolographicFramework()
+    rcdc = RecursiveCausalDiamondCosmology()
+    prs = PureRelationalSubstrate()
+    all_theories = EXISTING_THEORIES + [uhft, rcdc, prs]
+    candidate = rcdc  # the one whose verdict we summarize at the end
 
     print_matrix(all_theories, ALL_OBSERVATIONS)
     print_summary(all_theories, ALL_OBSERVATIONS)

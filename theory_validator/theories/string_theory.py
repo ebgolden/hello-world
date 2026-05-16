@@ -26,7 +26,11 @@ class StringTheory(Theory):
             "hafele_keating": Prediction(275.0, 10.0),
             # Cosmology: low-energy GR + matter content; broadly LCDM-compatible
             # but doesn't pick out specific values.
-            "hubble_constant": Prediction(70.0, 5.0),
+            # Landscape doesn't pick out H0 or the tension structure.
+            "hubble_local": Prediction(None),
+            "hubble_cmb": Prediction(None),
+            "sigma_8_lensing": Prediction(None),
+            "lithium_7_primordial": Prediction(None),
             "cmb_temperature": Prediction(2.7255, 0.005),
             "cmb_blackbody_shape": Prediction("blackbody"),
             "cmb_first_acoustic_peak": Prediction(220.0, 5.0),
@@ -68,7 +72,10 @@ class StringTheory(Theory):
             "michelson_morley": "PASS",
             "ives_stilwell": "PASS",
             "hafele_keating": "PASS",
-            "hubble_constant": "PASS",
+            "hubble_local": "FAIL",
+            "hubble_cmb": "FAIL",
+            "sigma_8_lensing": "FAIL",
+            "lithium_7_primordial": "FAIL",
             "cmb_temperature": "PASS",
             "cmb_blackbody_shape": "PASS",
             "cmb_first_acoustic_peak": "PASS",
