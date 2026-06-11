@@ -206,6 +206,10 @@ function renderDossier(index) {
   }
   dossierImg.alt = `Portrait of ${k.name}`;
   dossierImg.style.objectPosition = k.focus;
+  // shift the overscanned image left so the character sits in the clear
+  // zone (~40% of the portrait area) instead of under the text fade
+  const fx = parseFloat(k.focus);
+  dossierImg.style.left = k.flip ? "0" : `-${Math.min(Math.max(fx * 1.25 - 40, 0), 28)}%`;
   dossierName.textContent = k.name;
   dossierRole.textContent = k.role;
   dossierOrigin.textContent = k.origin;

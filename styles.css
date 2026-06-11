@@ -586,13 +586,18 @@ h2 {
   mask-image: linear-gradient(to right, black 52%, transparent 98%);
 }
 .dossier-portrait img {
-  width: 100%;
+  /* slightly overscanned so the per-character left shift never leaves a gap */
+  width: 125%;
+  max-width: none;
+  position: relative;
+  left: 0;
   height: 100%;
   object-fit: cover;
   object-position: top center;
   opacity: 1;
   transition: opacity 0.18s ease;
 }
+.dossier-card.flipped .dossier-portrait img { width: 100%; }
 .dossier-portrait img.loading { opacity: 0; }
 
 /* text sits over a soft left-to-right fade for contrast */
