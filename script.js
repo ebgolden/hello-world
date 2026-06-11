@@ -4,6 +4,7 @@
 const KEEPERS = [
   {
     id: "Tessa",
+    focus: "52% 10%",
     name: "Tessa Horton",
     role: "Scholar",
     origin: "Ohio, USA",
@@ -17,6 +18,7 @@ const KEEPERS = [
   },
   {
     id: "Tu",
+    focus: "72% 10%",
     name: "Tú Chen",
     role: "Scholar",
     origin: "Shaoguan, Guangdong Province, China",
@@ -31,6 +33,7 @@ const KEEPERS = [
   },
   {
     id: "Aedan",
+    focus: "60% 10%",
     name: "Aedan Colston",
     role: "Scholar",
     origin: "West Yorkshire, England",
@@ -44,6 +47,7 @@ const KEEPERS = [
   },
   {
     id: "Demyan",
+    focus: "60% 10%",
     name: "Demyan Ivanova",
     role: "Scholar",
     origin: "Riga, Latvia",
@@ -59,6 +63,7 @@ const KEEPERS = [
   },
   {
     id: "Elise",
+    focus: "55% 10%",
     name: "Élise Peters-Comtois",
     role: "Scholar",
     origin: "Paris, France",
@@ -73,6 +78,7 @@ const KEEPERS = [
   },
   {
     id: "Jurgen",
+    focus: "78% 10%",
     name: "Jürgen Tilver",
     role: "Teacher",
     origin: "Scotland",
@@ -87,6 +93,7 @@ const KEEPERS = [
   },
   {
     id: "KameKona",
+    focus: "60% 10%",
     name: "KameKona",
     role: "Scholar",
     origin: "Hawaii, USA",
@@ -101,6 +108,7 @@ const KEEPERS = [
   },
   {
     id: "Ming",
+    focus: "42% 10%",
     name: "Ming Sen",
     role: "Scholar",
     origin: "Outram, Singapore",
@@ -116,6 +124,7 @@ const KEEPERS = [
   },
   {
     id: "Reese",
+    focus: "60% 10%",
     name: "Reese Rolding",
     role: "Teacher",
     origin: "Australia",
@@ -187,8 +196,14 @@ let lastFocused = null;
 function renderDossier(index) {
   currentKeeper = (index + KEEPERS.length) % KEEPERS.length;
   const k = KEEPERS[currentKeeper];
-  dossierImg.src = `images/keepers/${k.id}-portrait.webp`;
+  const src = `images/keepers/${k.id}-portrait.webp`;
+  if (dossierImg.src !== new URL(src, location.href).href) {
+    dossierImg.classList.add("loading");
+    dossierImg.onload = () => dossierImg.classList.remove("loading");
+    dossierImg.src = src;
+  }
   dossierImg.alt = `Portrait of ${k.name}`;
+  dossierImg.style.objectPosition = k.focus;
   dossierName.textContent = k.name;
   dossierRole.textContent = k.role;
   dossierOrigin.textContent = k.origin;
@@ -230,6 +245,14 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeDossier();
   if (e.key === "ArrowLeft") renderDossier(currentKeeper - 1);
   if (e.key === "ArrowRight") renderDossier(currentKeeper + 1);
+});
+
+// Preload the dossier portraits so swapping Keepers is instant
+window.addEventListener("load", () => {
+  KEEPERS.forEach((k) => {
+    const img = new Image();
+    img.src = `images/keepers/${k.id}-portrait.webp`;
+  });
 });
 
 // ============================================================

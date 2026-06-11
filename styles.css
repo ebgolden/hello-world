@@ -586,7 +586,10 @@ h2 {
   height: 100%;
   object-fit: cover;
   object-position: top center;
+  opacity: 1;
+  transition: opacity 0.18s ease;
 }
+.dossier-portrait img.loading { opacity: 0; }
 
 .dossier-body {
   background: #151b30;
@@ -840,11 +843,13 @@ h2 {
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .hero-awards img { height: 58px; }
 
+  /* keep portrait left / text right at all sizes */
   .dossier { padding: 0.9rem; }
-  .dossier-card { grid-template-columns: 1fr; overflow-y: auto; }
-  .dossier-portrait { height: 260px; border-right: none; border-bottom: 1px solid var(--line); }
-  .dossier-portrait img { object-position: 50% 12%; }
-  .dossier-body { padding: 1.6rem 1.5rem 1.4rem; overflow-y: visible; }
+  .dossier-card { grid-template-columns: minmax(128px, 36%) 1fr; max-height: 92vh; }
+  .dossier-body { padding: 1.5rem 1.3rem 1.3rem; }
+  .dossier-name { font-size: 1.3rem; }
+  .dossier-traits li { font-size: 0.88rem; }
+  .dossier-meta { font-size: 0.85rem; gap: 0.3rem 1rem; }
 
   .nav-toggle { display: flex; }
   .nav-links {
