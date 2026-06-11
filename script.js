@@ -160,7 +160,7 @@ KEEPERS.forEach((k, i) => {
   li.style.setProperty("--gem", k.color);
   li.innerHTML = `
     <button class="keeper-btn" type="button" aria-label="Open dossier for ${k.name}">
-      <img src="images/keepers/${k.id}-portrait.webp" alt="Portrait of ${k.name}" loading="lazy" />
+      <img src="images/keepers/${k.id}-card.webp" alt="Portrait of ${k.name}" loading="lazy" />
       <span class="keeper-overlay">
         <span class="keeper-name">${k.name}</span>
         <span class="keeper-ability">${k.ability}</span>

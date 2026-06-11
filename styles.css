@@ -419,20 +419,22 @@ h2 {
   transform-style: preserve-3d;
   transition: transform 0.35s ease;
   will-change: transform;
-  border-radius: var(--radius-sm);
 }
 .book-cover {
   width: 100%;
-  border-radius: var(--radius-sm);
   filter: drop-shadow(-16px 26px 36px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 46px rgba(167, 139, 250, 0.22));
 }
+/* glare clipped to the book's silhouette via the cover's alpha channel */
 .book-glare {
   position: absolute;
   inset: 0;
-  border-radius: var(--radius-sm);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
+  -webkit-mask-image: url("images/cover.webp");
+  -webkit-mask-size: 100% 100%;
+  mask-image: url("images/cover.webp");
+  mask-size: 100% 100%;
 }
 
 .novel-copy p { margin-bottom: 1.1rem; color: var(--ink-soft); }
@@ -501,7 +503,7 @@ h2 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
   transition: transform 0.45s ease;
 }
 .keeper-card:hover .keeper-btn img { transform: scale(1.06); }
@@ -563,7 +565,7 @@ h2 {
   grid-template-columns: 320px 1fr;
   width: min(880px, 100%);
   max-height: 88vh;
-  background: linear-gradient(160deg, var(--bg-raised), var(--bg));
+  background: #151b30;
   border: 1px solid var(--line);
   border-radius: calc(var(--radius) + 4px);
   overflow: hidden;
@@ -575,17 +577,19 @@ h2 {
   to { opacity: 1; transform: none; }
 }
 
-.dossier-portrait { position: relative; min-height: 100%; }
+.dossier-portrait {
+  background: var(--bg-deep);
+  border-right: 1px solid var(--line);
+}
 .dossier-portrait img {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: top center;
 }
 
 .dossier-body {
+  background: #151b30;
   padding: 2.2rem 2.4rem 1.8rem;
   overflow-y: auto;
 }
@@ -637,7 +641,7 @@ h2 {
 .dossier-traits li {
   position: relative;
   padding-left: 1.4rem;
-  color: var(--ink-soft);
+  color: #c3c9dc;
   font-size: 0.95rem;
   line-height: 1.6;
 }
@@ -838,8 +842,8 @@ h2 {
 
   .dossier { padding: 0.9rem; }
   .dossier-card { grid-template-columns: 1fr; overflow-y: auto; }
-  .dossier-portrait { aspect-ratio: 16 / 11; min-height: 0; }
-  .dossier-portrait img { object-position: 50% 18%; }
+  .dossier-portrait { height: 260px; border-right: none; border-bottom: 1px solid var(--line); }
+  .dossier-portrait img { object-position: 50% 12%; }
   .dossier-body { padding: 1.6rem 1.5rem 1.4rem; overflow-y: visible; }
 
   .nav-toggle { display: flex; }
