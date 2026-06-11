@@ -434,14 +434,99 @@ h2 { font-size: clamp(1.8rem, 3.6vw, 2.7rem); margin-bottom: 1.2rem; letter-spac
   border-color: var(--gold);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 28px rgba(212, 163, 71, 0.18);
 }
-.keeper-card img { width: 100%; height: auto; }
+.keeper-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.keeper-btn img { width: 100%; height: auto; }
+.keeper-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.keeper-hint {
+  text-align: center;
+  margin-top: 2.2rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--gold);
+}
 
 .art-credit {
   text-align: center;
-  margin-top: 2.6rem;
+  margin-top: 0.6rem;
   font-size: 0.8rem;
   letter-spacing: 0.1em;
   color: var(--ink-faint);
+}
+
+/* ---------- Keeper lightbox ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 2.4rem 0.8rem;
+  background: rgba(12, 5, 7, 0.92);
+  backdrop-filter: blur(6px);
+}
+.lightbox[hidden] { display: none; }
+
+.lightbox-figure {
+  max-width: min(1400px, 94vw);
+  text-align: center;
+}
+.lightbox-img {
+  max-width: 100%;
+  max-height: 82vh;
+  margin: 0 auto;
+  border-radius: 6px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(163, 25, 43, 0.3);
+}
+.lightbox-caption {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  color: var(--gold-bright);
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  flex: 0 0 auto;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover { background: rgba(212, 163, 71, 0.18); border-color: var(--gold); }
+
+.lightbox-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+}
+
+@media (max-width: 640px) {
+  .lightbox { flex-direction: column; }
+  .lightbox-prev, .lightbox-next { position: absolute; bottom: 1.2rem; }
+  .lightbox-prev { left: calc(50% - 60px); }
+  .lightbox-next { right: calc(50% - 60px); }
+  .lightbox-img { max-height: 70vh; }
 }
 
 /* ---------- Author ---------- */

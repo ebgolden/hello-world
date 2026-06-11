@@ -108,16 +108,17 @@
           <p class="section-lede">Hidden in plain sight for centuries, the Keepers protect the Earth and its creatures &mdash; so humanity can survive, and reverse its course toward the planet&rsquo;s destruction.</p>
         </div>
         <ul class="keeper-grid">
-          <li class="keeper-card reveal"><img src="images/keepers/Tessa.png" alt="Keeper dossier: Tessa Horton" loading="lazy" /></li>
-          <li class="keeper-card reveal"><img src="images/keepers/Tu.png" alt="Keeper dossier: Tú Chen" loading="lazy" /></li>
-          <li class="keeper-card reveal"><img src="images/keepers/Aedan.png" alt="Keeper dossier: Aedan" loading="lazy" /></li>
-          <li class="keeper-card reveal"><img src="images/keepers/Demyan.png" alt="Keeper dossier: Demyan" loading="lazy" /></li>
-          <li class="keeper-card reveal"><img src="images/keepers/Elise.png" alt="Keeper dossier: Elise" loading="lazy" /></li>
-          <li class="keeper-card reveal"><img src="images/keepers/Jurgen.png" alt="Keeper dossier: Jurgen" loading="lazy" /></li>
-          <li class="keeper-card reveal"><img src="images/keepers/KameKona.png" alt="Keeper dossier: Kame Kona" loading="lazy" /></li>
-          <li class="keeper-card reveal"><img src="images/keepers/Ming.png" alt="Keeper dossier: Ming" loading="lazy" /></li>
-          <li class="keeper-card reveal"><img src="images/keepers/Reese.png" alt="Keeper dossier: Reese" loading="lazy" /></li>
+          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Tessa"><img src="images/keepers/Tessa.webp" alt="Keeper dossier: Tessa — select to enlarge and read her bio" loading="lazy" /></button></li>
+          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Tú"><img src="images/keepers/Tu.webp" alt="Keeper dossier: Tú — select to enlarge and read his bio" loading="lazy" /></button></li>
+          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Aedan"><img src="images/keepers/Aedan.webp" alt="Keeper dossier: Aedan — select to enlarge and read his bio" loading="lazy" /></button></li>
+          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Demyan"><img src="images/keepers/Demyan.webp" alt="Keeper dossier: Demyan — select to enlarge and read his bio" loading="lazy" /></button></li>
+          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Elise"><img src="images/keepers/Elise.webp" alt="Keeper dossier: Elise — select to enlarge and read her bio" loading="lazy" /></button></li>
+          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Jurgen"><img src="images/keepers/Jurgen.webp" alt="Keeper dossier: Jurgen — select to enlarge and read his bio" loading="lazy" /></button></li>
+          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Kame Kona"><img src="images/keepers/KameKona.webp" alt="Keeper dossier: Kame Kona — select to enlarge and read his bio" loading="lazy" /></button></li>
+          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Ming"><img src="images/keepers/Ming.webp" alt="Keeper dossier: Ming — select to enlarge and read her bio" loading="lazy" /></button></li>
+          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Reese"><img src="images/keepers/Reese.webp" alt="Keeper dossier: Reese — select to enlarge and read their bio" loading="lazy" /></button></li>
         </ul>
+        <p class="keeper-hint reveal">Click a Keeper to read their dossier</p>
         <p class="art-credit reveal">Character portrait artwork by Brett Casa&ntilde;os</p>
       </div>
     </section>
@@ -185,6 +186,17 @@
       <a href="https://ekwise.com/privacy-policy/">Privacy Policy</a>
     </div>
   </footer>
+
+  <!-- ========== KEEPER LIGHTBOX ========== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Keeper dossier viewer" hidden>
+    <button class="lightbox-close" type="button" aria-label="Close dossier">&times;</button>
+    <button class="lightbox-prev" type="button" aria-label="Previous Keeper">&#8249;</button>
+    <figure class="lightbox-figure">
+      <img class="lightbox-img" src="" alt="" />
+      <figcaption class="lightbox-caption"></figcaption>
+    </figure>
+    <button class="lightbox-next" type="button" aria-label="Next Keeper">&#8250;</button>
+  </div>
 
   <script src="script.js"></script>
 </body>
