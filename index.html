@@ -9,11 +9,10 @@
   <meta property="og:description" content="When you know the Earth is dying, what will you do to save it?" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ekwise.com" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <meta property="og:image" content="images/banner.jpg" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preload" href="fonts/sveva-light.woff" as="font" type="font/woff" crossorigin />
 </head>
 <body>
 
@@ -21,11 +20,7 @@
   <header class="site-header" id="top">
     <nav class="nav" aria-label="Main navigation">
       <a class="nav-brand" href="#top">
-        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
-          <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M20 7 L29 16 L26 30 L14 30 L11 16 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M20 7 L20 30 M11 16 L29 16" stroke="currentColor" stroke-width="0.8" opacity="0.6"/>
-        </svg>
+        <img class="brand-coin" src="images/coin_logo.png" alt="E.K. Wise coin logo" />
         <span>E.K.&thinsp;Wise</span>
       </a>
       <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
@@ -71,13 +66,9 @@
           <a class="btn btn-ghost" href="#novel">Discover the Story</a>
         </div>
         <div class="hero-awards">
-          <span class="award-seal" title="NIEA Finalist 2025">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.3 7.2 16.9l.9-5.4L4.2 7.7l5.4-.8z" fill="currentColor"/></svg>
-            NIEA Finalist 2025
-          </span>
-          <span class="award-seal" aria-label="Five star rated">
-            ★★★★★ <span class="seal-label">Reader Rated</span>
-          </span>
+          <img src="images/niea-finalist-seal-2025.png" alt="NIEA Finalist Seal 2025" />
+          <img src="images/finalist-medal-gold.png" alt="Finalist Medal" />
+          <img src="images/5star.png" alt="Five-star rated" />
         </div>
       </div>
       <a class="scroll-hint" href="#novel" aria-label="Scroll to the novel section">
@@ -89,19 +80,7 @@
     <section class="section section-novel" id="novel">
       <div class="container split">
         <div class="book-display reveal">
-          <!-- Replace this placeholder with the real cover: <img src="images/cover.jpg" alt="Keepers of the Rock: The Debilis Rising book cover"> -->
-          <div class="book-cover" role="img" aria-label="Keepers of the Rock: The Debilis Rising book cover placeholder">
-            <div class="book-cover-inner">
-              <svg class="cover-crystal" viewBox="0 0 120 200" aria-hidden="true">
-                <polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/>
-                <polygon points="60,0 100,60 60,80" class="facet f2"/>
-                <polygon points="60,0 20,60 60,80" class="facet f3"/>
-              </svg>
-              <p class="cover-series">Keepers of the Rock</p>
-              <p class="cover-title">The Debilis<br/>Rising</p>
-              <p class="cover-author">E.K. Wise</p>
-            </div>
-          </div>
+          <img class="book-cover" src="images/cover.jpg" alt="Keepers of the Rock: The Debilis Rising — Book 1 cover" />
         </div>
         <div class="novel-copy reveal">
           <p class="eyebrow">Book One</p>
@@ -110,7 +89,9 @@
           <p>The Keepers, bestowed with powers connected to the Earth, have a duty to protect the planet and its creatures, so humanity can reverse its accelerating course toward destruction. But they are forbidden from directly meddling in human affairs &mdash; and must rely on covert guidance to save mankind.</p>
           <p>Standing against them: <strong class="debilis">the Debilis</strong> &mdash; monsters who prey on humanity and manipulate it toward their ultimate goal &mdash; control of all Earth&rsquo;s resources, and humanity itself.</p>
           <p class="novel-pitch">If you love secret worlds, crystals, minerals, history, or science, you&rsquo;ll love this immersive 4&#8209;D reading experience.</p>
-          <a class="btn btn-primary" href="https://www.amazon.com/Debilis-Rising-Keepers-Rock-Book-ebook/dp/B0DZDB4BW4/" target="_blank" rel="noopener">Get Your Copy</a>
+          <a href="https://www.amazon.com/Debilis-Rising-Keepers-Rock-Book-ebook/dp/B0DZDB4BW4/" target="_blank" rel="noopener">
+            <img class="amazon-badge" src="images/amazon-badge.png" alt="Available at Amazon" />
+          </a>
         </div>
       </div>
     </section>
@@ -127,44 +108,15 @@
           <p class="section-lede">Hidden in plain sight for centuries, the Keepers protect the Earth and its creatures &mdash; so humanity can survive, and reverse its course toward the planet&rsquo;s destruction.</p>
         </div>
         <ul class="keeper-grid">
-          <!-- Drop in the Brett Casaños portraits: replace each .keeper-gem with
-               <img src="images/keepers/<name>.jpg" alt="Portrait of <Name>"> -->
-          <li class="keeper-card reveal" style="--gem: var(--amethyst)">
-            <div class="keeper-gem"><svg viewBox="0 0 120 200" aria-hidden="true"><polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/><polygon points="60,0 100,60 60,80" class="facet f2"/><polygon points="60,0 20,60 60,80" class="facet f3"/></svg></div>
-            <h3>Tessa</h3>
-          </li>
-          <li class="keeper-card reveal" style="--gem: var(--jade)">
-            <div class="keeper-gem"><svg viewBox="0 0 120 200" aria-hidden="true"><polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/><polygon points="60,0 100,60 60,80" class="facet f2"/><polygon points="60,0 20,60 60,80" class="facet f3"/></svg></div>
-            <h3>T&uacute;</h3>
-          </li>
-          <li class="keeper-card reveal" style="--gem: var(--ember)">
-            <div class="keeper-gem"><svg viewBox="0 0 120 200" aria-hidden="true"><polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/><polygon points="60,0 100,60 60,80" class="facet f2"/><polygon points="60,0 20,60 60,80" class="facet f3"/></svg></div>
-            <h3>Aedan</h3>
-          </li>
-          <li class="keeper-card reveal" style="--gem: var(--obsidian)">
-            <div class="keeper-gem"><svg viewBox="0 0 120 200" aria-hidden="true"><polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/><polygon points="60,0 100,60 60,80" class="facet f2"/><polygon points="60,0 20,60 60,80" class="facet f3"/></svg></div>
-            <h3>Demyan</h3>
-          </li>
-          <li class="keeper-card reveal" style="--gem: var(--rose)">
-            <div class="keeper-gem"><svg viewBox="0 0 120 200" aria-hidden="true"><polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/><polygon points="60,0 100,60 60,80" class="facet f2"/><polygon points="60,0 20,60 60,80" class="facet f3"/></svg></div>
-            <h3>Elise</h3>
-          </li>
-          <li class="keeper-card reveal" style="--gem: var(--pyrite)">
-            <div class="keeper-gem"><svg viewBox="0 0 120 200" aria-hidden="true"><polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/><polygon points="60,0 100,60 60,80" class="facet f2"/><polygon points="60,0 20,60 60,80" class="facet f3"/></svg></div>
-            <h3>Jurgen</h3>
-          </li>
-          <li class="keeper-card reveal" style="--gem: var(--lava)">
-            <div class="keeper-gem"><svg viewBox="0 0 120 200" aria-hidden="true"><polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/><polygon points="60,0 100,60 60,80" class="facet f2"/><polygon points="60,0 20,60 60,80" class="facet f3"/></svg></div>
-            <h3>Kame Kona</h3>
-          </li>
-          <li class="keeper-card reveal" style="--gem: var(--pearl)">
-            <div class="keeper-gem"><svg viewBox="0 0 120 200" aria-hidden="true"><polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/><polygon points="60,0 100,60 60,80" class="facet f2"/><polygon points="60,0 20,60 60,80" class="facet f3"/></svg></div>
-            <h3>Ming</h3>
-          </li>
-          <li class="keeper-card reveal" style="--gem: var(--malachite)">
-            <div class="keeper-gem"><svg viewBox="0 0 120 200" aria-hidden="true"><polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/><polygon points="60,0 100,60 60,80" class="facet f2"/><polygon points="60,0 20,60 60,80" class="facet f3"/></svg></div>
-            <h3>Reese</h3>
-          </li>
+          <li class="keeper-card reveal"><img src="images/keepers/Tessa.png" alt="Keeper dossier: Tessa Horton" loading="lazy" /></li>
+          <li class="keeper-card reveal"><img src="images/keepers/Tu.png" alt="Keeper dossier: Tú Chen" loading="lazy" /></li>
+          <li class="keeper-card reveal"><img src="images/keepers/Aedan.png" alt="Keeper dossier: Aedan" loading="lazy" /></li>
+          <li class="keeper-card reveal"><img src="images/keepers/Demyan.png" alt="Keeper dossier: Demyan" loading="lazy" /></li>
+          <li class="keeper-card reveal"><img src="images/keepers/Elise.png" alt="Keeper dossier: Elise" loading="lazy" /></li>
+          <li class="keeper-card reveal"><img src="images/keepers/Jurgen.png" alt="Keeper dossier: Jurgen" loading="lazy" /></li>
+          <li class="keeper-card reveal"><img src="images/keepers/KameKona.png" alt="Keeper dossier: Kame Kona" loading="lazy" /></li>
+          <li class="keeper-card reveal"><img src="images/keepers/Ming.png" alt="Keeper dossier: Ming" loading="lazy" /></li>
+          <li class="keeper-card reveal"><img src="images/keepers/Reese.png" alt="Keeper dossier: Reese" loading="lazy" /></li>
         </ul>
         <p class="art-credit reveal">Character portrait artwork by Brett Casa&ntilde;os</p>
       </div>
@@ -180,15 +132,8 @@
           <p>She is enticed by multicultural cuisine and will sample almost any food once. When not creating stories, she&rsquo;s likely wrangling teenagers, sweating on her stationary bike, reading, or studying cool rocks and minerals.</p>
           <p>Wise passionately advocates for learning evaluation, as she and three of her four kiddos (and maybe the dog) have ADHD. She earned degrees in psychology and clinical work and lives with her family in Southern California.</p>
         </div>
-        <div class="author-frame reveal" aria-hidden="true">
-          <!-- Replace with author photo: <img src="images/author.jpg" alt="E.K. Wise"> -->
-          <div class="author-photo-placeholder">
-            <svg viewBox="0 0 40 40">
-              <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1"/>
-              <path d="M20 7 L29 16 L26 30 L14 30 L11 16 Z" fill="none" stroke="currentColor" stroke-width="1"/>
-            </svg>
-            <span>E.K. Wise</span>
-          </div>
+        <div class="author-frame reveal">
+          <img class="author-photo" src="images/author.jpg" alt="E.K. Wise seated on boulders beneath oak trees" />
         </div>
       </div>
     </section>
@@ -215,10 +160,7 @@
   <footer class="site-footer" id="contact">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
-          <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M20 7 L29 16 L26 30 L14 30 L11 16 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
-        </svg>
+        <img class="brand-coin brand-coin-lg" src="images/coin_logo.png" alt="E.K. Wise coin logo" />
         <p class="footer-tagline">&ldquo;The hand that cradles the rock rules the world.&rdquo;</p>
       </div>
       <div class="footer-col">

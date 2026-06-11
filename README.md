@@ -6,14 +6,15 @@ Rising*.
 
 ## Design
 
-The theme is drawn from the book itself: geology, crystals, and an ancient
-order protecting a dying Earth. The look is a dark **"geode" aesthetic** —
-deep earthen darkness lit by glowing gemstone accents (amethyst, pyrite gold,
-jade), with faceted crystal motifs, sedimentary "strata" dividers, and
-classical serif display type (Cinzel / Cormorant Garamond).
+The theme is drawn straight from the book cover: **crimson darkness, gold
+lettering, and crystal-blue light**, with faceted crystal motifs and angled
+"strata" section dividers. Typography uses the brand's own fonts, self-hosted
+from the original site: **Sveva** (display), **Libre Caslon Text** (serif),
+and **Urbanist** (body).
 
-Each of the nine Keepers gets a gemstone color of their own in the character
-grid.
+All artwork is the real thing, pulled from ekwise.com: the book cover, the
+nine Keeper dossier portraits by Brett Casaños, the E.K. Wise coin logo,
+award seals, the Amazon badge, and the author photo.
 
 ## Structure
 
@@ -21,8 +22,10 @@ Plain static site — no build step required:
 
 - `index.html` — single-page layout: hero, the novel, meet the Keepers,
   about the author, newsletter, contact/footer
-- `styles.css` — all theming (gem colors defined as CSS variables in `:root`)
+- `styles.css` — all theming (palette defined as CSS variables in `:root`)
 - `script.js` — mobile nav + scroll-reveal animations
+- `images/` — cover, Keeper portraits, logo, seals, author photo
+- `fonts/` — Sveva, Libre Caslon Text, Urbanist
 - `favicon.svg`
 
 ## Preview locally
@@ -32,14 +35,7 @@ python3 -m http.server 8000
 # then open http://localhost:8000
 ```
 
-## Filling in real assets
+## Remaining placeholder
 
-Placeholders to replace (marked with HTML comments in `index.html`):
-
-- **Book cover** — swap the stylized CSS cover in `.book-display` for the real
-  cover image
-- **Keeper portraits** — replace each `.keeper-gem` crystal emblem with the
-  Brett Casaños character portraits
-- **Author photo** — replace `.author-photo-placeholder`
 - **Newsletter form** — point the form `action` at your email provider
   (Mailchimp, MailerLite, etc.)
