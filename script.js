@@ -208,7 +208,9 @@ function renderDossier(index) {
   dossierRole.textContent = k.role;
   dossierOrigin.textContent = k.origin;
   dossierAbility.textContent = `Ability: ${k.ability}`;
-  dossier.querySelector(".dossier-card").style.setProperty("--gem", k.color);
+  const card = dossier.querySelector(".dossier-card");
+  card.style.setProperty("--gem", k.color);
+  card.style.setProperty("--portrait", `url("images/keepers/${k.id}-portrait.webp")`);
   dossierTraits.innerHTML = "";
   k.traits.forEach((t) => {
     const li = document.createElement("li");

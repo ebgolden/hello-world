@@ -591,8 +591,26 @@ h2 {
 }
 .dossier-portrait img.loading { opacity: 0; }
 
+/* translucent glass panel — the character's artwork continues behind
+   the text, blurred and darkened to keep the copy readable */
 .dossier-body {
+  position: relative;
+  overflow: hidden;
   background: #151b30;
+}
+.dossier-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--portrait);
+  background-size: cover;
+  background-position: 60% 16%;
+  filter: blur(20px) brightness(0.34) saturate(1.1);
+  transform: scale(1.18);
+}
+.dossier-scroll {
+  position: relative;
+  max-height: 88vh;
   padding: 2.2rem 2.4rem 1.8rem;
   overflow-y: auto;
 }
@@ -846,7 +864,7 @@ h2 {
   /* keep portrait left / text right at all sizes */
   .dossier { padding: 0.9rem; }
   .dossier-card { grid-template-columns: minmax(128px, 36%) 1fr; max-height: 92vh; }
-  .dossier-body { padding: 1.5rem 1.3rem 1.3rem; }
+  .dossier-scroll { max-height: 92vh; padding: 1.5rem 1.3rem 1.3rem; }
   .dossier-name { font-size: 1.3rem; }
   .dossier-traits li { font-size: 0.88rem; }
   .dossier-meta { font-size: 0.85rem; gap: 0.3rem 1rem; }
