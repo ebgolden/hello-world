@@ -6,15 +6,21 @@ Rising*.
 
 ## Design
 
-The theme is drawn straight from the book cover: **crimson darkness, gold
-lettering, and crystal-blue light**, with faceted crystal motifs and angled
-"strata" section dividers. Typography uses the brand's own fonts, self-hosted
-from the original site: **Sveva** (display), **Libre Caslon Text** (serif),
-and **Urbanist** (body).
+A modern **"crystal cavern"** theme: deep slate dark mode lit by teal,
+amethyst, and gold mineral light, with rounded glass surfaces, pill buttons,
+and micro-interactions throughout. Typography uses the brand's own fonts,
+self-hosted from the original site: **Sveva** (display), **Libre Caslon
+Text** (serif), and **Urbanist** (body).
 
-All artwork is the real thing, pulled from ekwise.com: the book cover, the
-nine Keeper dossier portraits by Brett Casaños, the E.K. Wise coin logo,
-award seals, the Amazon badge, and the author photo.
+Interactive touches:
+
+- **Book cover** — 3D cursor-tracking tilt with a moving glare highlight
+- **Keeper cards** — portraits cropped from the original dossier artwork
+  (Brett Casaños); clicking opens a dossier modal with the character's
+  name, role, origin, ability chip, and full bio rendered as real text
+  (transcribed from the artwork), with prev/next + keyboard navigation
+- Floating hero crystals, scroll-reveal animations, hover states everywhere;
+  all motion respects `prefers-reduced-motion`
 
 ## Structure
 
@@ -23,7 +29,7 @@ Plain static site — no build step required:
 - `index.html` — single-page layout: hero, the novel, meet the Keepers,
   about the author, newsletter, contact/footer
 - `styles.css` — all theming (palette defined as CSS variables in `:root`)
-- `script.js` — mobile nav + scroll-reveal animations
+- `script.js` — Keeper data + dossier modal, book tilt, nav, scroll-reveal
 - `images/` — cover, Keeper portraits, logo, seals, author photo
 - `fonts/` — Sveva, Libre Caslon Text, Urbanist
 - `favicon.svg`

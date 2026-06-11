@@ -41,29 +41,40 @@
 
     <!-- ========== HERO ========== -->
     <section class="hero">
-      <div class="hero-strata" aria-hidden="true"></div>
+      <div class="hero-orbs" aria-hidden="true">
+        <span class="orb orb-teal"></span>
+        <span class="orb orb-violet"></span>
+        <span class="orb orb-gold"></span>
+      </div>
       <div class="hero-crystals" aria-hidden="true">
-        <svg class="crystal crystal-l" viewBox="0 0 120 200">
+        <svg class="crystal crystal-1" viewBox="0 0 120 200">
           <polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/>
           <polygon points="60,0 100,60 60,80" class="facet f2"/>
           <polygon points="60,0 20,60 60,80" class="facet f3"/>
-          <polygon points="60,80 100,60 85,200 60,200" class="facet f2"/>
         </svg>
-        <svg class="crystal crystal-r" viewBox="0 0 120 200">
-          <polygon points="60,0 100,60 85,200 35,200 20,60" class="facet f1"/>
-          <polygon points="60,0 100,60 60,80" class="facet f3"/>
-          <polygon points="60,0 20,60 60,80" class="facet f2"/>
-          <polygon points="60,80 20,60 35,200 60,200" class="facet f2"/>
+        <svg class="crystal crystal-2" viewBox="0 0 120 200">
+          <polygon points="60,0 100,60 85,200 35,200 20,60" class="facet v1"/>
+          <polygon points="60,0 100,60 60,80" class="facet v2"/>
+          <polygon points="60,0 20,60 60,80" class="facet v3"/>
+        </svg>
+        <svg class="crystal crystal-3" viewBox="0 0 120 200">
+          <polygon points="60,0 100,60 85,200 35,200 20,60" class="facet g1"/>
+          <polygon points="60,0 100,60 60,80" class="facet g2"/>
+          <polygon points="60,0 20,60 60,80" class="facet g3"/>
         </svg>
       </div>
       <div class="hero-inner reveal">
-        <p class="hero-kicker">An ancient secret society. Hidden in plain sight.</p>
+        <div class="hero-chips">
+          <span class="chip">YA Fantasy</span>
+          <span class="chip">Book One</span>
+          <span class="chip chip-gold">NIEA Finalist 2025</span>
+        </div>
         <h1 class="hero-title">Keepers <span class="hero-of">of the</span> Rock</h1>
-        <p class="hero-subtitle">The Debilis Rising &mdash; Book One</p>
+        <p class="hero-subtitle">The Debilis Rising</p>
         <p class="hero-tagline">&ldquo;The hand that cradles the rock <em>rules the world.</em>&rdquo;</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="https://www.amazon.com/Debilis-Rising-Keepers-Rock-Book-ebook/dp/B0DZDB4BW4/" target="_blank" rel="noopener">Out Now on Amazon</a>
-          <a class="btn btn-ghost" href="#novel">Discover the Story</a>
+          <a class="btn btn-ghost" href="#keepers">Meet the Keepers</a>
         </div>
         <div class="hero-awards">
           <img src="images/niea-finalist-seal-2025.png" alt="NIEA Finalist Seal 2025" />
@@ -80,10 +91,13 @@
     <section class="section section-novel" id="novel">
       <div class="container split">
         <div class="book-display reveal">
-          <img class="book-cover" src="images/cover.jpg" alt="Keepers of the Rock: The Debilis Rising — Book 1 cover" />
+          <div class="book-tilt" id="bookTilt">
+            <img class="book-cover" src="images/cover.jpg" alt="Keepers of the Rock: The Debilis Rising — Book 1 cover" />
+            <span class="book-glare" aria-hidden="true"></span>
+          </div>
         </div>
         <div class="novel-copy reveal">
-          <p class="eyebrow">Book One</p>
+          <p class="eyebrow">The Novel</p>
           <h2>When you know the Earth is dying, <span class="accent">what will you do to save it?</span></h2>
           <p>Tessa Horton and Tú Chen discover they possess supernatural abilities and are admitted to the <strong>College of Geological Evolution</strong> &mdash; a secretive international school managed by an ancient organization: the Keepers of the Rock.</p>
           <p>The Keepers, bestowed with powers connected to the Earth, have a duty to protect the planet and its creatures, so humanity can reverse its accelerating course toward destruction. But they are forbidden from directly meddling in human affairs &mdash; and must rely on covert guidance to save mankind.</p>
@@ -96,29 +110,17 @@
       </div>
     </section>
 
-    <!-- ========== DIVIDER ========== -->
-    <div class="strata-divider" aria-hidden="true"></div>
-
     <!-- ========== THE KEEPERS ========== -->
     <section class="section section-keepers" id="keepers">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">An ancient order</p>
           <h2>Meet the Keepers</h2>
-          <p class="section-lede">Hidden in plain sight for centuries, the Keepers protect the Earth and its creatures &mdash; so humanity can survive, and reverse its course toward the planet&rsquo;s destruction.</p>
+          <p class="section-lede">Hidden in plain sight for centuries, the Keepers protect the Earth and its creatures. Click a Keeper to open their dossier.</p>
         </div>
-        <ul class="keeper-grid">
-          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Tessa"><img src="images/keepers/Tessa.webp" alt="Keeper dossier: Tessa — select to enlarge and read her bio" loading="lazy" /></button></li>
-          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Tú"><img src="images/keepers/Tu.webp" alt="Keeper dossier: Tú — select to enlarge and read his bio" loading="lazy" /></button></li>
-          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Aedan"><img src="images/keepers/Aedan.webp" alt="Keeper dossier: Aedan — select to enlarge and read his bio" loading="lazy" /></button></li>
-          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Demyan"><img src="images/keepers/Demyan.webp" alt="Keeper dossier: Demyan — select to enlarge and read his bio" loading="lazy" /></button></li>
-          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Elise"><img src="images/keepers/Elise.webp" alt="Keeper dossier: Elise — select to enlarge and read her bio" loading="lazy" /></button></li>
-          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Jurgen"><img src="images/keepers/Jurgen.webp" alt="Keeper dossier: Jurgen — select to enlarge and read his bio" loading="lazy" /></button></li>
-          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Kame Kona"><img src="images/keepers/KameKona.webp" alt="Keeper dossier: Kame Kona — select to enlarge and read his bio" loading="lazy" /></button></li>
-          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Ming"><img src="images/keepers/Ming.webp" alt="Keeper dossier: Ming — select to enlarge and read her bio" loading="lazy" /></button></li>
-          <li class="keeper-card reveal"><button class="keeper-btn" type="button" data-keeper="Reese"><img src="images/keepers/Reese.webp" alt="Keeper dossier: Reese — select to enlarge and read their bio" loading="lazy" /></button></li>
+        <ul class="keeper-grid" id="keeperGrid">
+          <!-- Cards are rendered by script.js from the keeper data -->
         </ul>
-        <p class="keeper-hint reveal">Click a Keeper to read their dossier</p>
         <p class="art-credit reveal">Character portrait artwork by Brett Casa&ntilde;os</p>
       </div>
     </section>
@@ -142,16 +144,18 @@
     <!-- ========== NEWS / NEWSLETTER ========== -->
     <section class="section section-news" id="news">
       <div class="container narrow reveal">
-        <p class="eyebrow">Latest news</p>
-        <h2>Join the Order</h2>
-        <p class="section-lede">Sign up for the newsletter to receive Keeper character portrait previews, series updates, and news from E.K. Wise.</p>
-        <!-- Wire this form to your newsletter provider (Mailchimp, MailerLite, etc.) -->
-        <form class="newsletter-form" action="#" method="post" onsubmit="return false;">
-          <label class="sr-only" for="email">Email address</label>
-          <input id="email" type="email" name="email" placeholder="your@email.com" required />
-          <button type="submit" class="btn btn-primary">Sign Up</button>
-        </form>
-        <p class="form-note">No spam. The Keepers guard your inbox as they guard the Earth.</p>
+        <div class="news-card">
+          <p class="eyebrow">Latest news</p>
+          <h2>Join the Order</h2>
+          <p class="section-lede">Sign up for the newsletter to receive Keeper character portrait previews, series updates, and news from E.K. Wise.</p>
+          <!-- Wire this form to your newsletter provider (Mailchimp, MailerLite, etc.) -->
+          <form class="newsletter-form" action="#" method="post" onsubmit="return false;">
+            <label class="sr-only" for="email">Email address</label>
+            <input id="email" type="email" name="email" placeholder="your@email.com" required />
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </form>
+          <p class="form-note">No spam. The Keepers guard your inbox as they guard the Earth.</p>
+        </div>
       </div>
     </section>
 
@@ -187,15 +191,29 @@
     </div>
   </footer>
 
-  <!-- ========== KEEPER LIGHTBOX ========== -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Keeper dossier viewer" hidden>
-    <button class="lightbox-close" type="button" aria-label="Close dossier">&times;</button>
-    <button class="lightbox-prev" type="button" aria-label="Previous Keeper">&#8249;</button>
-    <figure class="lightbox-figure">
-      <img class="lightbox-img" src="" alt="" />
-      <figcaption class="lightbox-caption"></figcaption>
-    </figure>
-    <button class="lightbox-next" type="button" aria-label="Next Keeper">&#8250;</button>
+  <!-- ========== KEEPER DOSSIER MODAL ========== -->
+  <div class="dossier" id="dossier" role="dialog" aria-modal="true" aria-label="Keeper dossier" hidden>
+    <div class="dossier-card">
+      <button class="dossier-close" type="button" aria-label="Close dossier">&times;</button>
+      <div class="dossier-portrait">
+        <img id="dossierImg" src="" alt="" />
+      </div>
+      <div class="dossier-body">
+        <p class="dossier-kicker">Keeper Dossier</p>
+        <h3 class="dossier-name" id="dossierName"></h3>
+        <div class="dossier-meta">
+          <span class="meta-item" id="dossierRole"></span>
+          <span class="meta-item" id="dossierOrigin"></span>
+        </div>
+        <span class="ability-chip" id="dossierAbility"></span>
+        <ul class="dossier-traits" id="dossierTraits"></ul>
+        <div class="dossier-nav">
+          <button class="dossier-prev" type="button" aria-label="Previous Keeper">&#8249; Prev</button>
+          <span class="dossier-count" id="dossierCount"></span>
+          <button class="dossier-next" type="button" aria-label="Next Keeper">Next &#8250;</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
