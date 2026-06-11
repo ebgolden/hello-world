@@ -18,6 +18,7 @@ const KEEPERS = [
   },
   {
     id: "Tu",
+    flip: true,
     focus: "72% 10%",
     name: "Tú Chen",
     role: "Scholar",
@@ -78,6 +79,7 @@ const KEEPERS = [
   },
   {
     id: "Jurgen",
+    flip: true,
     focus: "78% 10%",
     name: "Jürgen Tilver",
     role: "Teacher",
@@ -210,7 +212,7 @@ function renderDossier(index) {
   dossierAbility.textContent = `Ability: ${k.ability}`;
   const card = dossier.querySelector(".dossier-card");
   card.style.setProperty("--gem", k.color);
-  card.style.setProperty("--portrait", `url("images/keepers/${k.id}-portrait.webp")`);
+  card.classList.toggle("flipped", Boolean(k.flip));
   dossierTraits.innerHTML = "";
   k.traits.forEach((t) => {
     const li = document.createElement("li");

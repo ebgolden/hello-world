@@ -561,11 +561,9 @@ h2 {
 .dossier-card {
   --gem: var(--teal);
   position: relative;
-  display: grid;
-  grid-template-columns: 320px 1fr;
   width: min(880px, 100%);
   max-height: 88vh;
-  background: #151b30;
+  background: #10141f;
   border: 1px solid var(--line);
   border-radius: calc(var(--radius) + 4px);
   overflow: hidden;
@@ -577,9 +575,15 @@ h2 {
   to { opacity: 1; transform: none; }
 }
 
+/* the portrait bleeds wide into the card and fades out under the text */
 .dossier-portrait {
-  background: var(--bg-deep);
-  border-right: 1px solid var(--line);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 56%;
+  -webkit-mask-image: linear-gradient(to right, black 52%, transparent 98%);
+  mask-image: linear-gradient(to right, black 52%, transparent 98%);
 }
 .dossier-portrait img {
   width: 100%;
@@ -591,26 +595,33 @@ h2 {
 }
 .dossier-portrait img.loading { opacity: 0; }
 
-/* translucent glass panel — the character's artwork continues behind
-   the text, blurred and darkened to keep the copy readable */
+/* text sits over a soft left-to-right fade for contrast */
 .dossier-body {
   position: relative;
-  overflow: hidden;
-  background: #151b30;
+  margin-left: 42%;
+  background: linear-gradient(90deg, rgba(16, 20, 31, 0) 0%, rgba(16, 20, 31, 0.55) 30%, rgba(16, 20, 31, 0.62) 100%);
 }
-.dossier-body::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--portrait);
-  background-size: cover;
-  background-position: 60% 16%;
-  filter: blur(20px) brightness(0.34) saturate(1.1);
-  transform: scale(1.18);
+
+/* mirrored layout for characters who stand on the right of their artwork */
+.dossier-card.flipped .dossier-portrait {
+  left: auto;
+  right: 0;
+  width: 70%;
+  -webkit-mask-image: linear-gradient(to left, black 52%, transparent 98%);
+  mask-image: linear-gradient(to left, black 52%, transparent 98%);
+}
+.dossier-card.flipped .dossier-body {
+  margin-left: 0;
+  margin-right: 42%;
+  background: linear-gradient(270deg, rgba(16, 20, 31, 0) 0%, rgba(16, 20, 31, 0.55) 30%, rgba(16, 20, 31, 0.62) 100%);
+}
+.dossier-card.flipped .dossier-close {
+  background: rgba(10, 13, 24, 0.75);
 }
 .dossier-scroll {
   position: relative;
   max-height: 88vh;
+  min-height: 480px;
   padding: 2.2rem 2.4rem 1.8rem;
   overflow-y: auto;
 }
@@ -863,8 +874,12 @@ h2 {
 
   /* keep portrait left / text right at all sizes */
   .dossier { padding: 0.9rem; }
-  .dossier-card { grid-template-columns: minmax(128px, 36%) 1fr; max-height: 92vh; }
-  .dossier-scroll { max-height: 92vh; padding: 1.5rem 1.3rem 1.3rem; }
+  .dossier-card { max-height: 92vh; }
+  .dossier-portrait { width: 62%; }
+  .dossier-card.flipped .dossier-portrait { width: 84%; }
+  .dossier-body { margin-left: 36%; }
+  .dossier-card.flipped .dossier-body { margin-right: 36%; }
+  .dossier-scroll { max-height: 92vh; min-height: 0; padding: 1.5rem 1.3rem 1.3rem; }
   .dossier-name { font-size: 1.3rem; }
   .dossier-traits li { font-size: 0.88rem; }
   .dossier-meta { font-size: 0.85rem; gap: 0.3rem 1rem; }
