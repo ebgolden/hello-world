@@ -22,34 +22,94 @@ import {
   canAfford,
   totalCards,
 } from '@/lib/engine';
+import { GIcon, BoardIcon } from '@/components/Icon';
 
 function costText(cost) {
-  return Object.entries(cost)
-    .map(([r, n]) => `${n} ${RESOURCE_INFO[r].icon}`)
-    .join(' + ');
+  return Object.entries(cost).map(([r, n]) => (
+    <span key={r} style={{ whiteSpace: 'nowrap', marginRight: 6 }}>
+      {n}
+      <GIcon name={RESOURCE_INFO[r].icon} size={13} color={RESOURCE_INFO[r].color} style={{ marginLeft: 2 }} />
+    </span>
+  ));
 }
 
-function Settlement({ x, y, color }) {
-  const pts = [
-    [-7, 6], [-7, -2], [0, -9], [7, -2], [7, 6],
-  ]
-    .map(([dx, dy]) => `${x + dx},${y + dy}`)
-    .join(' ');
-  return <polygon points={pts} fill={color} stroke="#14100a" strokeWidth="2" />;
+// Decorative icon arrangements per terrain, in hex-local coordinates.
+// [icon, dx, dy, size, color, opacity]
+const MOTIFS = {
+  forest: [
+    ['pine', -26, -10, 20, '#16331c', 0.9],
+    ['pine', -4, -24, 24, '#1c3f23', 0.9],
+    ['pine', 18, -10, 21, '#16331c', 0.9],
+    ['pine', -19, 16, 25, '#1c3f23', 0.95],
+    ['pine', 9, 19, 27, '#142e19', 0.95],
+  ],
+  hills: [
+    ['hills', -13, -16, 32, '#5e2f18', 0.75],
+    ['hills', 15, -12, 26, '#54290f', 0.7],
+    ['brickwall', -16, 18, 20, '#4f2510', 0.85],
+    ['claybrick', 14, 18, 18, '#4f2510', 0.85],
+  ],
+  pasture: [
+    ['grass', -24, -12, 16, '#42611f', 0.9],
+    ['grass', 0, -22, 15, '#42611f', 0.85],
+    ['grass', -26, 14, 15, '#3a561b', 0.9],
+    ['grass', 22, -14, 14, '#3a561b', 0.85],
+    ['sheep', 9, 14, 26, '#f2ecd9', 0.95],
+  ],
+  fields: [
+    ['wheat', -22, -12, 20, '#7c5c12', 0.85],
+    ['wheat', -1, -22, 19, '#86640f', 0.8],
+    ['wheat', 19, -10, 20, '#7c5c12', 0.85],
+    ['wheat', -13, 16, 22, '#6f5210', 0.9],
+    ['wheat', 12, 18, 21, '#6f5210', 0.9],
+    ['windmill', 27, 10, 18, '#5d450e', 0.6],
+  ],
+  mountains: [
+    ['peaks', -11, -8, 38, '#33333e', 0.9],
+    ['mountaintop', 15, 12, 30, '#2c2c36', 0.9],
+    ['crystal', 21, -15, 15, '#cfe6f5', 0.9],
+    ['crystal', -24, 15, 12, '#b8d5ea', 0.8],
+  ],
+  desert: [
+    ['swamp', -15, -10, 26, '#211d18', 0.85],
+    ['swamp', 14, -14, 21, '#211d18', 0.75],
+    ['deadwood', 4, 16, 26, '#1c1814', 0.9],
+    ['swamp', -22, 16, 18, '#26211b', 0.8],
+  ],
+};
+
+function Token({ x, y, n }) {
+  const hot = n === 6 || n === 8;
+  const ink = hot ? '#a32a1d' : '#3a2f1e';
+  const pips = 6 - Math.abs(7 - n);
+  return (
+    <g filter="url(#f-shadow)">
+      <circle cx={x} cy={y} r="16" fill="url(#g-token)" stroke="#6b5836" strokeWidth="1.5" />
+      <circle cx={x} cy={y} r="13.5" fill="none" stroke="rgba(107,88,54,0.35)" strokeWidth="0.8" />
+      <text x={x} y={y + 3.5} textAnchor="middle" fontSize={hot ? 15 : 13} fontWeight="bold" fill={ink}>
+        {n}
+      </text>
+      {Array.from({ length: pips }, (_, i) => (
+        <circle key={i} cx={x + (i - (pips - 1) / 2) * 4} cy={y + 9.5} r="1.3" fill={ink} />
+      ))}
+    </g>
+  );
 }
 
-function City({ x, y, color }) {
-  const pts = [
-    [-10, 8], [-10, -3], [-4, -3], [-4, -11], [4, -11], [4, -3], [10, -3], [10, 8],
-  ]
-    .map(([dx, dy]) => `${x + dx},${y + dy}`)
-    .join(' ');
-  return <polygon points={pts} fill={color} stroke="#14100a" strokeWidth="2" />;
+function Nazgul({ x, y }) {
+  return (
+    <g filter="url(#f-shadow)">
+      <circle cx={x} cy={y} r="14" fill="#171020" stroke="#7a1f12" strokeWidth="1.5" />
+      <g filter="url(#f-glow)">
+        <BoardIcon name="eye" x={x} y={y} s={21} color="#ff8c2e" />
+      </g>
+    </g>
+  );
 }
 
 function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMode }) {
   const verts = Object.values(geom.vertices);
-  const pad = 26;
+  const pad = 28;
   const minX = Math.min(...verts.map((v) => v.x)) - pad;
   const maxX = Math.max(...verts.map((v) => v.x)) + pad;
   const minY = Math.min(...verts.map((v) => v.y)) - pad;
@@ -57,53 +117,60 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
 
   return (
     <svg viewBox={`${minX} ${minY} ${maxX - minX} ${maxY - minY}`}>
+      <defs>
+        {Object.entries(TERRAIN_INFO).map(([t, info]) => (
+          <radialGradient key={t} id={`g-${t}`} cx="50%" cy="40%" r="80%">
+            <stop offset="0%" stopColor={info.grad[0]} />
+            <stop offset="100%" stopColor={info.grad[1]} />
+          </radialGradient>
+        ))}
+        <radialGradient id="g-token" cx="50%" cy="36%" r="75%">
+          <stop offset="0%" stopColor="#f6ecd2" />
+          <stop offset="100%" stopColor="#d4c197" />
+        </radialGradient>
+        <radialGradient id="g-bg" cx="50%" cy="45%" r="75%">
+          <stop offset="0%" stopColor="#2c2317" />
+          <stop offset="100%" stopColor="#16100a" />
+        </radialGradient>
+        <filter id="f-shadow" x="-40%" y="-40%" width="180%" height="180%">
+          <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" floodColor="#000" floodOpacity="0.55" />
+        </filter>
+        <filter id="f-glow" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="2.2" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <rect x={minX} y={minY} width={maxX - minX} height={maxY - minY} rx="14" fill="url(#g-bg)" />
+
       {/* terrain */}
       {state.board.hexes.map((h) => {
         const corners = hexCorners(h.q, h.r);
         const c = hexCenter(h.q, h.r);
         const info = TERRAIN_INFO[h.terrain];
-        const hot = h.token === 6 || h.token === 8;
+        const poly = corners.map((p) => `${p.x},${p.y}`).join(' ');
         return (
           <g key={h.id}>
-            <polygon
-              points={corners.map((p) => `${p.x},${p.y}`).join(' ')}
-              fill={info.fill}
-              stroke="#1a140d"
-              strokeWidth="3"
-            />
+            <polygon points={poly} fill={`url(#g-${h.terrain})`} stroke="#221a10" strokeWidth="3.5" />
+            <polygon points={poly} fill="none" stroke="rgba(255,236,190,0.10)" strokeWidth="1" />
+            {(MOTIFS[h.terrain] || []).map(([icon, dx, dy, s, color, op], i) => (
+              <BoardIcon key={i} name={icon} x={c.x + dx} y={c.y + dy} s={s} color={color} opacity={op} />
+            ))}
             <text
               x={c.x}
-              y={c.y - 22}
+              y={c.y - 24}
               textAnchor="middle"
-              fontSize="9"
-              fill="rgba(20,14,8,0.75)"
-              style={{ fontStyle: 'italic' }}
+              fontSize="8"
+              fill="rgba(15,10,5,0.65)"
+              style={{ fontStyle: 'italic', letterSpacing: 0.4 }}
             >
               {info.name}
             </text>
-            {h.token !== null && (
-              <g>
-                <circle cx={c.x} cy={c.y} r="15" fill="#e8dcc0" stroke="#5a4a2e" strokeWidth="1.5" />
-                <text
-                  x={c.x}
-                  y={c.y + 5}
-                  textAnchor="middle"
-                  fontSize="15"
-                  fontWeight="bold"
-                  fill={hot ? '#a32a1d' : '#3a2f1e'}
-                >
-                  {h.token}
-                </text>
-              </g>
-            )}
-            {state.board.robberHex === h.id && (
-              <g>
-                <circle cx={c.x} cy={c.y + 25} r="12" fill="#100c14" stroke="#a32a1d" strokeWidth="1.5" />
-                <text x={c.x} y={c.y + 30} textAnchor="middle" fontSize="13">
-                  👁
-                </text>
-              </g>
-            )}
+            {h.token !== null && <Token x={c.x} y={c.y} n={h.token} />}
+            {state.board.robberHex === h.id && <Nazgul x={c.x} y={c.y + (h.token !== null ? 27 : 0)} />}
           </g>
         );
       })}
@@ -119,7 +186,7 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
         const x2 = b.x + (a.x - b.x) * shrink;
         const y2 = b.y + (a.y - b.y) * shrink;
         return (
-          <g key={eid}>
+          <g key={eid} filter="url(#f-shadow)">
             <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#14100a" strokeWidth="9" strokeLinecap="round" />
             <line
               x1={x1}
@@ -138,10 +205,19 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
       {Object.entries(state.buildings).map(([vid, b]) => {
         const v = geom.vertices[vid];
         const color = state.players[b.player].color;
-        return b.type === 'city' ? (
-          <City key={vid} x={v.x} y={v.y} color={color} />
-        ) : (
-          <Settlement key={vid} x={v.x} y={v.y} color={color} />
+        const city = b.type === 'city';
+        return (
+          <g key={vid} filter="url(#f-shadow)">
+            <BoardIcon
+              name={city ? 'castle' : 'village'}
+              x={v.x}
+              y={v.y - 2}
+              s={city ? 34 : 26}
+              color={color}
+              stroke="#14100a"
+              strokeWidth={city ? 22 : 26}
+            />
+          </g>
         );
       })}
 
@@ -156,7 +232,7 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
               points={hexCorners(h.q, h.r)
                 .map((p) => `${p.x},${p.y}`)
                 .join(' ')}
-              fill="rgba(163,42,29,0.12)"
+              fill="rgba(163,42,29,0.14)"
               stroke="rgba(240,207,126,0.5)"
               strokeWidth="1.5"
               strokeDasharray="5 4"
@@ -179,7 +255,7 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
             y2={b.y}
             strokeWidth="13"
             strokeLinecap="round"
-            stroke="rgba(240,207,126,0.28)"
+            stroke="rgba(240,207,126,0.3)"
             pointerEvents="all"
             onClick={() =>
               dispatch({
@@ -201,7 +277,7 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
             cx={v.x}
             cy={v.y}
             r="9"
-            fill="rgba(240,207,126,0.45)"
+            fill="rgba(240,207,126,0.5)"
             stroke="#14100a"
             strokeWidth="1"
             onClick={() => {
@@ -225,7 +301,9 @@ function Lobby({ onStart }) {
     <div className="lobby">
       <h1 className="title">SETTLERS OF MIDDLE-EARTH</h1>
       <p className="subtitle">One board to rule them all</p>
-      <div className="ring">💍</div>
+      <div className="ring">
+        <GIcon name="ring" size={84} color="#e8c34a" style={{ filter: 'drop-shadow(0 0 18px rgba(232,195,74,0.55))' }} />
+      </div>
       <p>
         Gather Timber from Fangorn, Clay from Bree, Fleece from the Shire, Grain from the
         Pelennor and Mithril from Moria. Build roads, villages and strongholds — but beware
@@ -341,7 +419,7 @@ export default function Game() {
             <div className="prompt">{prompt}</div>
             <div className="row">
               <button disabled={phase !== 'roll'} onClick={() => dispatch({ type: 'ROLL' })}>
-                🎲 Roll Dice
+                <GIcon name="dice" /> Roll Dice
               </button>
               {state.dice && (
                 <span className="dice">
@@ -361,21 +439,21 @@ export default function Game() {
                 disabled={phase !== 'main' || (!placingFreeRoads && !canAfford(me, COSTS.road))}
                 onClick={() => setMode(mode === 'road' ? null : 'road')}
               >
-                🛤 Road
+                <GIcon name="road" /> Road
               </button>
               <button
                 className={mode === 'settlement' ? 'active' : ''}
                 disabled={phase !== 'main' || placingFreeRoads || !canAfford(me, COSTS.settlement)}
                 onClick={() => setMode(mode === 'settlement' ? null : 'settlement')}
               >
-                🏠 Village
+                <GIcon name="village" /> Village
               </button>
               <button
                 className={mode === 'city' ? 'active' : ''}
                 disabled={phase !== 'main' || placingFreeRoads || !canAfford(me, COSTS.city)}
                 onClick={() => setMode(mode === 'city' ? null : 'city')}
               >
-                🏰 Stronghold
+                <GIcon name="castle" /> Stronghold
               </button>
               <button
                 disabled={
@@ -386,7 +464,7 @@ export default function Game() {
                 }
                 onClick={() => dispatch({ type: 'BUY_DEV' })}
               >
-                📜 Tale of Old ({state.devDeck.length})
+                <GIcon name="scroll" /> Tale of Old ({state.devDeck.length})
               </button>
             </div>
             <div className="row">
@@ -428,7 +506,23 @@ export default function Game() {
                   return (
                     <div className="dev-card" key={i}>
                       <div>
-                        <div>{info.name}</div>
+                        <div>
+                          <GIcon
+                            name={
+                              c.type === 'knight'
+                                ? 'horse'
+                                : c.type === 'vp'
+                                  ? 'crown'
+                                  : c.type === 'roads'
+                                    ? 'road'
+                                    : c.type === 'monopoly'
+                                      ? 'ring'
+                                      : 'scroll'
+                            }
+                            color="var(--gold)"
+                          />{' '}
+                          {info.name}
+                        </div>
                         <div className="desc">{info.desc}</div>
                       </div>
                       {c.type !== 'vp' && (
@@ -508,27 +602,41 @@ export default function Game() {
                   </span>
                   <span className="player-meta">
                     ⭐ {computeVP(state, p.id)}
-                    {state.longestRoadHolder === p.id ? ' · 🛤 Longest Road' : ''}
-                    {state.largestArmyHolder === p.id ? ' · 🐎 Mightiest Host' : ''}
-                    {' · 🃏 '}
-                    {totalCards(p)}
+                    {state.longestRoadHolder === p.id && (
+                      <>
+                        {' · '}
+                        <GIcon name="road" size={12} /> Longest Road
+                      </>
+                    )}
+                    {state.largestArmyHolder === p.id && (
+                      <>
+                        {' · '}
+                        <GIcon name="horse" size={12} /> Mightiest Host
+                      </>
+                    )}
                   </span>
                 </div>
                 <div className="res-row">
                   {RESOURCES.map((r) => (
                     <span key={r} title={RESOURCE_INFO[r].name}>
-                      {RESOURCE_INFO[r].icon} {p.resources[r]}
+                      <GIcon name={RESOURCE_INFO[r].icon} color={RESOURCE_INFO[r].color} /> {p.resources[r]}
                     </span>
                   ))}
-                  <span title="Riders of Rohan played">🐎 {p.knightsPlayed}</span>
-                  <span title="Tales of Old in hand">📜 {p.devCards.length}</span>
+                  <span title="Riders of Rohan played">
+                    <GIcon name="horse" color="var(--muted)" /> {p.knightsPlayed}
+                  </span>
+                  <span title="Tales of Old in hand">
+                    <GIcon name="scroll" color="var(--muted)" /> {p.devCards.length}
+                  </span>
                 </div>
               </div>
             ))}
             <div className="costs">
-              🛤 Road: {costText(COSTS.road)} &nbsp;·&nbsp; 🏠 Village: {costText(COSTS.settlement)}
+              <GIcon name="road" size={12} /> Road: {costText(COSTS.road)} · <GIcon name="village" size={12} />{' '}
+              Village: {costText(COSTS.settlement)}
               <br />
-              🏰 Stronghold: {costText(COSTS.city)} &nbsp;·&nbsp; 📜 Tale: {costText(COSTS.dev)}
+              <GIcon name="castle" size={12} /> Stronghold: {costText(COSTS.city)} ·{' '}
+              <GIcon name="scroll" size={12} /> Tale: {costText(COSTS.dev)}
             </div>
           </div>
 
@@ -560,7 +668,12 @@ export default function Game() {
       {state.winner !== null && (
         <div className="winner-overlay">
           <div className="winner-box">
-            <div style={{ fontSize: 48 }}>👑</div>
+            <GIcon
+              name="crown"
+              size={64}
+              color="#e8c34a"
+              style={{ filter: 'drop-shadow(0 0 14px rgba(232,195,74,0.6))' }}
+            />
             <h2>{state.players[state.winner].name} unites Middle-earth!</h2>
             <p style={{ color: 'var(--muted)', marginBottom: 18 }}>
               {computeVP(state, state.winner)} victory points
@@ -580,6 +693,24 @@ function Footer() {
       A fan-made hot-seat strategy game inspired by classic settlement-building board games and
       the world of J.R.R. Tolkien. Not affiliated with or endorsed by Catan GmbH or Middle-earth
       Enterprises.
+      <br />
+      Icons by{' '}
+      <a href="https://lorcblog.blogspot.com" target="_blank" rel="noreferrer">
+        Lorc
+      </a>{' '}
+      and{' '}
+      <a href="https://delapouite.com" target="_blank" rel="noreferrer">
+        Delapouite
+      </a>{' '}
+      via{' '}
+      <a href="https://game-icons.net" target="_blank" rel="noreferrer">
+        game-icons.net
+      </a>{' '}
+      (
+      <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer">
+        CC BY 3.0
+      </a>
+      ).
     </div>
   );
 }
