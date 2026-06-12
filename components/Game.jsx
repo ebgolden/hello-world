@@ -282,8 +282,10 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
         const y1 = a.y + (b.y - a.y) * shrink;
         const x2 = b.x + (a.x - b.x) * shrink;
         const y2 = b.y + (a.y - b.y) * shrink;
+        // No filter here: vertical edges have a zero-width bounding box, which
+        // collapses percentage-based filter regions and hides the road entirely.
         return (
-          <g key={eid} filter="url(#f-shadow)">
+          <g key={eid}>
             <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#2c2014" strokeWidth="8.5" strokeLinecap="round" />
             <line
               x1={x1}
@@ -468,19 +470,21 @@ export default function Game() {
 
   const me = state.players[state.current];
   const phase = state.phase;
-  const placingFreeRoads = phase === 'main' && state.freeRoads > 0;
   const rates = tradeRates(state, state.current);
+
+  const roadSpots = phase === 'main' ? legalRoads(state, geom, state.current) : [];
+  const villageSpots = phase === 'main' ? legalSettlements(state, geom, state.current) : [];
+  const citySpots = phase === 'main' ? legalCities(state, state.current) : [];
+  const placingFreeRoads = phase === 'main' && state.freeRoads > 0 && roadSpots.length > 0;
 
   let clickableVerts = [];
   let clickableEdges = [];
   if (phase === 'setup-settlement') clickableVerts = legalSetupSettlements(state, geom);
   else if (phase === 'setup-road') clickableEdges = legalSetupRoads(state, geom);
   else if (phase === 'main') {
-    if (placingFreeRoads || (mode === 'road' && canAfford(me, COSTS.road)))
-      clickableEdges = legalRoads(state, geom, state.current);
-    else if (mode === 'settlement' && canAfford(me, COSTS.settlement))
-      clickableVerts = legalSettlements(state, geom, state.current);
-    else if (mode === 'city' && canAfford(me, COSTS.city)) clickableVerts = legalCities(state, state.current);
+    if (placingFreeRoads || (mode === 'road' && canAfford(me, COSTS.road))) clickableEdges = roadSpots;
+    else if (mode === 'settlement' && canAfford(me, COSTS.settlement)) clickableVerts = villageSpots;
+    else if (mode === 'city' && canAfford(me, COSTS.city)) clickableVerts = citySpots;
   }
 
   const prompt =
@@ -545,21 +549,35 @@ export default function Game() {
             <div className="row">
               <button
                 className={mode === 'road' || placingFreeRoads ? 'active' : ''}
-                disabled={phase !== 'main' || (!placingFreeRoads && !canAfford(me, COSTS.road))}
+                disabled={
+                  phase !== 'main' ||
+                  roadSpots.length === 0 ||
+                  (!placingFreeRoads && !canAfford(me, COSTS.road))
+                }
                 onClick={() => setMode(mode === 'road' ? null : 'road')}
               >
                 <GIcon name="road" /> Road
               </button>
               <button
                 className={mode === 'settlement' ? 'active' : ''}
-                disabled={phase !== 'main' || placingFreeRoads || !canAfford(me, COSTS.settlement)}
+                disabled={
+                  phase !== 'main' ||
+                  placingFreeRoads ||
+                  villageSpots.length === 0 ||
+                  !canAfford(me, COSTS.settlement)
+                }
                 onClick={() => setMode(mode === 'settlement' ? null : 'settlement')}
               >
                 <GIcon name="village" /> Village
               </button>
               <button
                 className={mode === 'city' ? 'active' : ''}
-                disabled={phase !== 'main' || placingFreeRoads || !canAfford(me, COSTS.city)}
+                disabled={
+                  phase !== 'main' ||
+                  placingFreeRoads ||
+                  citySpots.length === 0 ||
+                  !canAfford(me, COSTS.city)
+                }
                 onClick={() => setMode(mode === 'city' ? null : 'city')}
               >
                 <GIcon name="castle" /> Stronghold
