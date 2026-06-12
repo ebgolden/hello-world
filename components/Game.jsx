@@ -18,6 +18,7 @@ import {
   legalRoads,
   legalSettlements,
   legalCities,
+  tradeRates,
   computeVP,
   canAfford,
   totalCards,
@@ -107,9 +108,39 @@ function Nazgul({ x, y }) {
   );
 }
 
+function Port({ geom, port }) {
+  const a = geom.vertices[port.verts[0]];
+  const b = geom.vertices[port.verts[1]];
+  const mx = (a.x + b.x) / 2;
+  const my = (a.y + b.y) / 2;
+  // The board is centered on the origin, so outward = away from (0,0).
+  const len = Math.hypot(mx, my) || 1;
+  const px = mx + (mx / len) * 23;
+  const py = my + (my / len) * 23;
+  return (
+    <g filter="url(#f-shadow)">
+      <line x1={a.x} y1={a.y} x2={px} y2={py} stroke="#7d6238" strokeWidth="3.5" />
+      <line x1={b.x} y1={b.y} x2={px} y2={py} stroke="#7d6238" strokeWidth="3.5" />
+      <circle cx={px} cy={py} r="12" fill="url(#g-token)" stroke="#6b5836" strokeWidth="1.5" />
+      {port.kind === 'any' ? (
+        <text x={px} y={py + 3.5} textAnchor="middle" fontSize="9" fontWeight="bold" fill="#3a2f1e">
+          3:1
+        </text>
+      ) : (
+        <g>
+          <BoardIcon name={RESOURCE_INFO[port.kind].icon} x={px} y={py - 2.5} s={13} color="#3a2f1e" />
+          <text x={px} y={py + 9.5} textAnchor="middle" fontSize="6.5" fontWeight="bold" fill="#3a2f1e">
+            2:1
+          </text>
+        </g>
+      )}
+    </g>
+  );
+}
+
 function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMode }) {
   const verts = Object.values(geom.vertices);
-  const pad = 28;
+  const pad = 44;
   const minX = Math.min(...verts.map((v) => v.x)) - pad;
   const maxX = Math.max(...verts.map((v) => v.x)) + pad;
   const minY = Math.min(...verts.map((v) => v.y)) - pad;
@@ -145,6 +176,11 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
       </defs>
 
       <rect x={minX} y={minY} width={maxX - minX} height={maxY - minY} rx="14" fill="url(#g-bg)" />
+
+      {/* harbors */}
+      {state.board.ports.map((p, i) => (
+        <Port key={i} geom={geom} port={p} />
+      ))}
 
       {/* terrain */}
       {state.board.hexes.map((h) => {
@@ -361,6 +397,7 @@ export default function Game() {
   const me = state.players[state.current];
   const phase = state.phase;
   const placingFreeRoads = phase === 'main' && state.freeRoads > 0;
+  const rates = tradeRates(state, state.current);
 
   let clickableVerts = [];
   let clickableEdges = [];
@@ -468,24 +505,26 @@ export default function Game() {
               </button>
             </div>
             <div className="row">
-              <span style={{ fontSize: 13, color: 'var(--muted)' }}>Bank 4:1</span>
+              <span style={{ fontSize: 13, color: 'var(--muted)' }}>Bank &amp; harbors</span>
               <select value={pick.give} onChange={(e) => setPick({ ...pick, give: e.target.value })}>
                 {RESOURCES.map((r) => (
                   <option key={r} value={r}>
-                    give {RESOURCE_INFO[r].name}
+                    give {rates[r]} {RESOURCE_INFO[r].name}
                   </option>
                 ))}
               </select>
               <select value={pick.get} onChange={(e) => setPick({ ...pick, get: e.target.value })}>
                 {RESOURCES.map((r) => (
                   <option key={r} value={r}>
-                    get {RESOURCE_INFO[r].name}
+                    get 1 {RESOURCE_INFO[r].name}
                   </option>
                 ))}
               </select>
               <button
                 disabled={
-                  phase !== 'main' || pick.give === pick.get || me.resources[pick.give] < 4
+                  phase !== 'main' ||
+                  pick.give === pick.get ||
+                  me.resources[pick.give] < rates[pick.give]
                 }
                 onClick={() => dispatch({ type: 'TRADE_BANK', give: pick.give, get: pick.get })}
               >

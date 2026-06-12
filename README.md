@@ -15,7 +15,8 @@ browser as a hot-seat game for 2–4 players. Built with Next.js and deployed on
 - **Build:** roads (1🌲 1🧱), villages (1🌲 1🧱 1🐑 1🌾), strongholds (3💎 2🌾), and
   Tales of Old (1🐑 1🌾 1💎) — development cards including Riders of Rohan, the Palantír,
   the Great East Road, Galadriel's Gift, and the One Ring.
-- **Trade** with the bank at 4:1.
+- **Trade** with the bank at 4:1 — or better through the 9 coastal **harbors**: a village on a
+  3:1 harbor trades any resource at 3:1, and each resource has one 2:1 harbor.
 - **Bonuses:** Longest Road (5+ road chain, 2⭐) and the Mightiest Host (3+ Riders, 2⭐).
 - **Win:** first realm to **10 victory points** unites Middle-earth.
 
