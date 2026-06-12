@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import useCellSize from '@/components/useCellSize';
 import { newGame, reduce, ROWS, SIZE, FLEET } from '@/lib/beacons/engine';
 import { GIcon } from '@/components/Icon';
 import Handoff from '@/components/Handoff';
@@ -132,6 +133,7 @@ function Lobby({ onStart }) {
 
 export default function BeaconsGame() {
   const [state, setState] = useState(null);
+  const bigCell = useCellSize(34, 11, 100);
 
   if (!state) {
     return (
@@ -222,16 +224,16 @@ export default function BeaconsGame() {
         <div className="layout">
           <div className="board-wrap" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', alignItems: 'flex-start' }}>
             {state.phase === 'setup' ? (
-              <CampGrid title={`The camps of ${viewer.name}`} cellSize={34} renderCell={renderMine} />
+              <CampGrid title={`The camps of ${viewer.name}`} cellSize={bigCell} renderCell={renderMine} />
             ) : (
               <>
                 <CampGrid
                   title={`The hills of ${foe.name}`}
-                  cellSize={34}
+                  cellSize={bigCell}
                   renderCell={renderTarget}
                   onCell={(x, y) => dispatch({ type: 'FIRE', x, y })}
                 />
-                <CampGrid title={`My camps (${viewer.name})`} cellSize={20} renderCell={renderMine} />
+                <CampGrid title={`My camps (${viewer.name})`} cellSize={Math.min(20, bigCell)} renderCell={renderMine} />
               </>
             )}
           </div>

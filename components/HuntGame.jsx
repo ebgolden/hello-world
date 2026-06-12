@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import useCellSize from '@/components/useCellSize';
 import {
   newGame,
   reduce,
@@ -128,6 +129,7 @@ function Lobby({ onStart }) {
 export default function HuntGame() {
   const [state, setState] = useState(null);
   const [sel, setSel] = useState(null);
+  const cellSize = useCellSize(42, 10, 100);
 
   if (!state) {
     return (
@@ -177,8 +179,6 @@ export default function HuntGame() {
       setSel(null);
     }
   };
-
-  const cellSize = 42;
 
   const prompt =
     state.phase === 'setup'
