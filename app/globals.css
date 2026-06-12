@@ -5,15 +5,17 @@
 }
 
 :root {
-  --bg: #16120d;
-  --panel: #241d14;
-  --panel-2: #2e2519;
-  --border: #4d3f2a;
+  --bg: #1d1410;
   --gold: #d4af5a;
   --gold-bright: #f0cf7e;
-  --parchment: #e8dcc0;
   --text: #d8cdb4;
   --muted: #9a8c70;
+  --ink: #3a2a18;
+  --ink-muted: #75603f;
+  --parch: #e9dab4;
+  --parch-2: #e0cfa4;
+  --parch-border: #a8895a;
+  --accent: #8a5a16;
 }
 
 html,
@@ -23,44 +25,55 @@ body {
 
 body {
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"),
-    radial-gradient(ellipse at 50% 0%, #241d12 0%, var(--bg) 65%);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 0%, #2c1f15 0%, var(--bg) 65%);
   color: var(--text);
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-fell), Georgia, 'Times New Roman', serif;
   -webkit-font-smoothing: antialiased;
 }
 
+button,
+.title,
+.section-title,
+.player-name,
+h2 {
+  font-family: var(--font-cinzel), Georgia, serif;
+}
+
 button {
-  font-family: inherit;
   cursor: pointer;
-  background: linear-gradient(#3a2f1e, #2b2315);
-  color: var(--gold-bright);
-  border: 1px solid var(--border);
+  background: linear-gradient(#503a20, #3a2a16);
+  color: #ecc977;
+  border: 1px solid #7a5c30;
   border-radius: 6px;
   padding: 7px 12px;
-  font-size: 14px;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  box-shadow: inset 0 1px 0 rgba(236, 201, 119, 0.18), 0 1px 3px rgba(0, 0, 0, 0.4);
   transition: border-color 0.15s, color 0.15s;
 }
 
 button:hover:not(:disabled) {
-  border-color: var(--gold);
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
 }
 
 button:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
   cursor: default;
 }
 
 button.active {
   border-color: var(--gold-bright);
-  background: linear-gradient(#54431f, #3a2f15);
+  background: linear-gradient(#6b4e22, #4c3818);
+  color: var(--gold-bright);
 }
 
 select {
   font-family: inherit;
-  background: var(--panel-2);
-  color: var(--text);
-  border: 1px solid var(--border);
+  background: #f2e7c8;
+  color: var(--ink);
+  border: 1px solid var(--parch-border);
   border-radius: 5px;
   padding: 5px 7px;
   font-size: 13px;
@@ -76,9 +89,10 @@ select {
 
 .title {
   font-size: 30px;
-  letter-spacing: 3px;
+  font-weight: 700;
+  letter-spacing: 4px;
   color: var(--gold-bright);
-  text-shadow: 0 0 24px rgba(212, 175, 90, 0.35);
+  text-shadow: 0 0 24px rgba(212, 175, 90, 0.4);
   text-align: center;
 }
 
@@ -90,9 +104,11 @@ select {
 }
 
 .lobby {
-  margin-top: 8vh;
+  margin-top: 7vh;
   text-align: center;
-  max-width: 560px;
+  max-width: 580px;
+  font-size: 17px;
+  line-height: 1.65;
 }
 
 .lobby .ring {
@@ -107,14 +123,14 @@ select {
 }
 
 .lobby-buttons button {
-  font-size: 17px;
+  font-size: 16px;
   padding: 14px 22px;
 }
 
 .lobby-note {
   margin-top: 26px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
 }
 
@@ -133,16 +149,18 @@ select {
   flex: 1 1 540px;
   min-width: 340px;
   max-width: 760px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px;
+  background: linear-gradient(150deg, #38271a, #261a10);
+  border: 1px solid #5e4426;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.5);
 }
 
 .board-wrap svg {
   width: 100%;
   height: auto;
   display: block;
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.45));
 }
 
 .side {
@@ -154,17 +172,25 @@ select {
   gap: 10px;
 }
 
+/* Parchment panels: remap the shared palette vars for ink-on-paper. */
 .panel {
-  background: linear-gradient(160deg, #281f14 0%, var(--panel) 45%, #1f1810 100%);
-  border: 1px solid var(--border);
+  --muted: var(--ink-muted);
+  --gold: var(--accent);
+  --gold-bright: #6b3d10;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.24 0 0 0 0 0.1 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(160deg, #eee0ba 0%, var(--parch) 50%, #dcc795 100%);
+  color: var(--ink);
+  border: 1px solid var(--parch-border);
   border-radius: 10px;
   padding: 12px;
-  box-shadow: inset 0 1px 0 rgba(232, 195, 74, 0.07), 0 2px 8px rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 0 0 3px rgba(138, 90, 22, 0.12), 0 2px 8px rgba(0, 0, 0, 0.45);
 }
 
 .prompt {
   font-size: 15px;
-  color: var(--gold-bright);
+  font-weight: bold;
+  color: #6b3d10;
   min-height: 22px;
 }
 
@@ -177,8 +203,9 @@ select {
 }
 
 .dice {
-  font-size: 22px;
+  font-size: 21px;
   letter-spacing: 2px;
+  color: var(--ink);
 }
 
 .players {
@@ -188,30 +215,33 @@ select {
 }
 
 .player {
-  border: 1px solid var(--border);
+  border: 1px solid var(--parch-border);
   border-radius: 8px;
   padding: 8px 10px;
-  background: var(--panel-2);
+  background: rgba(255, 246, 220, 0.35);
 }
 
 .player.current {
-  border-color: var(--gold);
-  box-shadow: 0 0 10px rgba(212, 175, 90, 0.25);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px rgba(138, 90, 22, 0.45), inset 0 0 12px rgba(138, 90, 22, 0.1);
 }
 
 .player-head {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .player-name {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
 }
 
 .player-meta {
-  color: var(--muted);
+  color: var(--ink-muted);
   font-size: 12px;
 }
 
@@ -221,6 +251,7 @@ select {
   margin-top: 6px;
   font-size: 14px;
   flex-wrap: wrap;
+  color: var(--ink);
 }
 
 .dev-cards {
@@ -235,49 +266,49 @@ select {
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--parch-border);
   border-radius: 6px;
   padding: 6px 8px;
   font-size: 13px;
-  background: var(--panel-2);
+  background: rgba(255, 246, 220, 0.4);
 }
 
 .dev-card .desc {
-  color: var(--muted);
+  color: var(--ink-muted);
   font-size: 12px;
 }
 
 .log {
   max-height: 180px;
   overflow-y: auto;
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.55;
-  color: var(--muted);
+  color: var(--ink-muted);
 }
 
 .log div:last-child {
-  color: var(--text);
+  color: var(--ink);
 }
 
 .section-title {
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--muted);
+  color: var(--ink-muted);
   margin-bottom: 6px;
 }
 
 .costs {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--ink-muted);
   margin-top: 8px;
-  line-height: 1.7;
+  line-height: 1.9;
 }
 
 .winner-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 8, 5, 0.85);
+  background: rgba(16, 10, 5, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -285,8 +316,9 @@ select {
 }
 
 .winner-box {
-  background: var(--panel);
-  border: 2px solid var(--gold);
+  background: linear-gradient(160deg, #eee0ba, #dcc795);
+  color: var(--ink);
+  border: 2px solid var(--accent);
   border-radius: 12px;
   padding: 40px 52px;
   text-align: center;
@@ -294,17 +326,17 @@ select {
 }
 
 .winner-box h2 {
-  color: var(--gold-bright);
-  font-size: 26px;
-  margin-bottom: 10px;
+  color: #6b3d10;
+  font-size: 24px;
+  margin: 10px 0;
 }
 
 .picker {
-  border: 1px solid var(--gold);
+  border: 1px solid var(--accent);
   border-radius: 8px;
   padding: 10px;
   margin-top: 10px;
-  background: var(--panel-2);
+  background: rgba(255, 246, 220, 0.5);
 }
 
 .footer {
@@ -330,16 +362,15 @@ select {
 }
 
 .vertex-spot:hover {
-  fill: rgba(240, 207, 126, 0.9);
+  fill: rgba(138, 90, 22, 0.85);
 }
 
 .edge-spot {
   cursor: pointer;
-  stroke: rgba(240, 207, 126, 0);
 }
 
 .edge-spot:hover {
-  stroke: rgba(240, 207, 126, 0.8);
+  stroke: rgba(138, 90, 22, 0.75);
 }
 
 .hex-target {
@@ -347,6 +378,6 @@ select {
 }
 
 .hex-target:hover {
-  stroke: var(--gold-bright);
+  stroke: #8a5a16;
   stroke-width: 3;
 }

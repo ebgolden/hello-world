@@ -34,59 +34,60 @@ function costText(cost) {
   ));
 }
 
-// Decorative icon arrangements per terrain, in hex-local coordinates.
+// Decorative ink-symbol arrangements per terrain, in hex-local coordinates,
+// drawn like the hand-inked symbols of an old fantasy map.
 // [icon, dx, dy, size, color, opacity]
 const MOTIFS = {
   forest: [
-    ['pine', -26, -10, 20, '#16331c', 0.9],
-    ['pine', -4, -24, 24, '#1c3f23', 0.9],
-    ['pine', 18, -10, 21, '#16331c', 0.9],
-    ['pine', -19, 16, 25, '#1c3f23', 0.95],
-    ['pine', 9, 19, 27, '#142e19', 0.95],
+    ['pine', -26, -10, 20, '#2f4527', 0.85],
+    ['pine', -4, -24, 24, '#35502c', 0.8],
+    ['pine', 18, -10, 21, '#2f4527', 0.85],
+    ['pine', -19, 16, 25, '#35502c', 0.9],
+    ['pine', 9, 19, 27, '#2a3d22', 0.9],
   ],
   hills: [
-    ['hills', -13, -16, 32, '#5e2f18', 0.75],
-    ['hills', 15, -12, 26, '#54290f', 0.7],
-    ['brickwall', -16, 18, 20, '#4f2510', 0.85],
-    ['claybrick', 14, 18, 18, '#4f2510', 0.85],
+    ['hills', -13, -16, 32, '#6b3a1a', 0.7],
+    ['hills', 15, -12, 26, '#5e3115', 0.65],
+    ['brickwall', -16, 18, 20, '#5e3115', 0.8],
+    ['claybrick', 14, 18, 18, '#5e3115', 0.8],
   ],
   pasture: [
-    ['grass', -24, -12, 16, '#42611f', 0.9],
-    ['grass', 0, -22, 15, '#42611f', 0.85],
-    ['grass', -26, 14, 15, '#3a561b', 0.9],
-    ['grass', 22, -14, 14, '#3a561b', 0.85],
-    ['sheep', 9, 14, 26, '#f2ecd9', 0.95],
+    ['grass', -24, -12, 16, '#46571f', 0.85],
+    ['grass', 0, -22, 15, '#46571f', 0.8],
+    ['grass', -26, 14, 15, '#3e4d1b', 0.85],
+    ['grass', 22, -14, 14, '#3e4d1b', 0.8],
+    ['sheep', 9, 14, 26, '#4a3a22', 0.85],
   ],
   fields: [
-    ['wheat', -22, -12, 20, '#7c5c12', 0.85],
-    ['wheat', -1, -22, 19, '#86640f', 0.8],
-    ['wheat', 19, -10, 20, '#7c5c12', 0.85],
-    ['wheat', -13, 16, 22, '#6f5210', 0.9],
-    ['wheat', 12, 18, 21, '#6f5210', 0.9],
+    ['wheat', -22, -12, 20, '#7c5c14', 0.8],
+    ['wheat', -1, -22, 19, '#86640f', 0.75],
+    ['wheat', 19, -10, 20, '#7c5c14', 0.8],
+    ['wheat', -13, 16, 22, '#6f5210', 0.85],
+    ['wheat', 12, 18, 21, '#6f5210', 0.85],
     ['windmill', 27, 10, 18, '#5d450e', 0.6],
   ],
   mountains: [
-    ['peaks', -11, -8, 38, '#33333e', 0.9],
-    ['mountaintop', 15, 12, 30, '#2c2c36', 0.9],
-    ['crystal', 21, -15, 15, '#cfe6f5', 0.9],
-    ['crystal', -24, 15, 12, '#b8d5ea', 0.8],
+    ['peaks', -11, -8, 38, '#45403a', 0.85],
+    ['mountaintop', 15, 12, 30, '#3c3833', 0.85],
+    ['crystal', 21, -15, 15, '#4f7390', 0.85],
+    ['crystal', -24, 15, 12, '#5a7a96', 0.75],
   ],
   desert: [
-    ['swamp', -15, -10, 26, '#211d18', 0.85],
-    ['swamp', 14, -14, 21, '#211d18', 0.75],
-    ['deadwood', 4, 16, 26, '#1c1814', 0.9],
-    ['swamp', -22, 16, 18, '#26211b', 0.8],
+    ['swamp', -15, -10, 26, '#4a4031', 0.8],
+    ['swamp', 14, -14, 21, '#4a4031', 0.7],
+    ['deadwood', 4, 16, 26, '#3f362a', 0.85],
+    ['swamp', -22, 16, 18, '#524836', 0.75],
   ],
 };
 
 function Token({ x, y, n }) {
   const hot = n === 6 || n === 8;
-  const ink = hot ? '#a32a1d' : '#3a2f1e';
+  const ink = hot ? '#9c2a18' : '#3c2d1c';
   const pips = 6 - Math.abs(7 - n);
   return (
     <g filter="url(#f-shadow)">
-      <circle cx={x} cy={y} r="16" fill="url(#g-token)" stroke="#6b5836" strokeWidth="1.5" />
-      <circle cx={x} cy={y} r="13.5" fill="none" stroke="rgba(107,88,54,0.35)" strokeWidth="0.8" />
+      <circle cx={x} cy={y} r="16" fill="url(#g-token)" stroke="#6b5230" strokeWidth="1.5" />
+      <circle cx={x} cy={y} r="13.5" fill="none" stroke="rgba(107,82,48,0.4)" strokeWidth="0.8" />
       <text x={x} y={y + 3.5} textAnchor="middle" fontSize={hot ? 15 : 13} fontWeight="bold" fill={ink}>
         {n}
       </text>
@@ -118,18 +119,20 @@ function Port({ geom, port }) {
   const px = mx + (mx / len) * 23;
   const py = my + (my / len) * 23;
   return (
-    <g filter="url(#f-shadow)">
-      <line x1={a.x} y1={a.y} x2={px} y2={py} stroke="#7d6238" strokeWidth="3.5" />
-      <line x1={b.x} y1={b.y} x2={px} y2={py} stroke="#7d6238" strokeWidth="3.5" />
-      <circle cx={px} cy={py} r="12" fill="url(#g-token)" stroke="#6b5836" strokeWidth="1.5" />
+    <g>
+      <g filter="url(#f-ink)">
+        <line x1={a.x} y1={a.y} x2={px} y2={py} stroke="#5e4426" strokeWidth="3" />
+        <line x1={b.x} y1={b.y} x2={px} y2={py} stroke="#5e4426" strokeWidth="3" />
+      </g>
+      <circle cx={px} cy={py} r="12" fill="url(#g-token)" stroke="#6b5230" strokeWidth="1.4" />
       {port.kind === 'any' ? (
-        <text x={px} y={py + 3.5} textAnchor="middle" fontSize="9" fontWeight="bold" fill="#3a2f1e">
+        <text x={px} y={py + 3.5} textAnchor="middle" fontSize="9" fontWeight="bold" fill="#3c2d1c">
           3:1
         </text>
       ) : (
         <g>
-          <BoardIcon name={RESOURCE_INFO[port.kind].icon} x={px} y={py - 2.5} s={13} color="#3a2f1e" />
-          <text x={px} y={py + 9.5} textAnchor="middle" fontSize="6.5" fontWeight="bold" fill="#3a2f1e">
+          <BoardIcon name={RESOURCE_INFO[port.kind].icon} x={px} y={py - 2.5} s={13} color="#3c2d1c" />
+          <text x={px} y={py + 9.5} textAnchor="middle" fontSize="6.5" fontWeight="bold" fill="#3c2d1c">
             2:1
           </text>
         </g>
@@ -156,15 +159,20 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
           </radialGradient>
         ))}
         <radialGradient id="g-token" cx="50%" cy="36%" r="75%">
-          <stop offset="0%" stopColor="#f6ecd2" />
-          <stop offset="100%" stopColor="#d4c197" />
+          <stop offset="0%" stopColor="#f4e7c4" />
+          <stop offset="100%" stopColor="#dcc89c" />
         </radialGradient>
-        <radialGradient id="g-bg" cx="50%" cy="45%" r="75%">
-          <stop offset="0%" stopColor="#2c2317" />
-          <stop offset="100%" stopColor="#16100a" />
+        <radialGradient id="g-parch" cx="50%" cy="42%" r="80%">
+          <stop offset="0%" stopColor="#eee0ba" />
+          <stop offset="100%" stopColor="#d9c48f" />
+        </radialGradient>
+        <radialGradient id="g-vignette" cx="50%" cy="50%" r="72%">
+          <stop offset="0%" stopColor="rgba(88,58,20,0)" />
+          <stop offset="78%" stopColor="rgba(88,58,20,0.05)" />
+          <stop offset="100%" stopColor="rgba(74,46,14,0.4)" />
         </radialGradient>
         <filter id="f-shadow" x="-40%" y="-40%" width="180%" height="180%">
-          <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" floodColor="#000" floodOpacity="0.55" />
+          <feDropShadow dx="0" dy="1.2" stdDeviation="1.2" floodColor="#3a2510" floodOpacity="0.45" />
         </filter>
         <filter id="f-glow" x="-80%" y="-80%" width="260%" height="260%">
           <feGaussianBlur stdDeviation="2.2" result="b" />
@@ -173,25 +181,78 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
+        {/* hand-drawn wobble for hex washes, outlines and piers */}
+        <filter id="f-ink" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="7" result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="4.5" />
+        </filter>
+        {/* parchment grain and age blotches */}
+        <filter id="f-grain">
+          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3" />
+          <feColorMatrix values="0 0 0 0 0.34 0 0 0 0 0.24 0 0 0 0 0.10 0 0 0 0.07 0" />
+        </filter>
+        <filter id="f-blotch">
+          <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="3" seed="11" />
+          <feColorMatrix values="0 0 0 0 0.38 0 0 0 0 0.26 0 0 0 0 0.10 0 0 0 0.11 0" />
+        </filter>
       </defs>
 
-      <rect x={minX} y={minY} width={maxX - minX} height={maxY - minY} rx="14" fill="url(#g-bg)" />
+      <rect x={minX} y={minY} width={maxX - minX} height={maxY - minY} rx="14" fill="url(#g-parch)" />
+
+      {/* sea flourishes */}
+      <g opacity="0.5">
+        <BoardIcon name="wavecrest" x={minX + 38} y={minY + 38} s={20} color="#6b5436" />
+        <BoardIcon name="wavecrest" x={minX + 66} y={minY + 52} s={14} color="#6b5436" />
+        <BoardIcon name="compass" x={maxX - 50} y={minY + 50} s={52} color="#5e4426" />
+        <BoardIcon name="sailboat" x={minX + 46} y={maxY - 44} s={30} color="#5e4426" />
+        <BoardIcon name="wavecrest" x={maxX - 42} y={maxY - 38} s={20} color="#6b5436" />
+        <BoardIcon name="wavecrest" x={maxX - 68} y={maxY - 26} s={13} color="#6b5436" />
+      </g>
 
       {/* harbors */}
       {state.board.ports.map((p, i) => (
         <Port key={i} geom={geom} port={p} />
       ))}
 
-      {/* terrain */}
+      {/* terrain washes with hand-drawn edges */}
       {state.board.hexes.map((h) => {
-        const corners = hexCorners(h.q, h.r);
+        const poly = hexCorners(h.q, h.r)
+          .map((p) => `${p.x},${p.y}`)
+          .join(' ');
+        return (
+          <g key={h.id} filter="url(#f-ink)">
+            <polygon points={poly} fill={`url(#g-${h.terrain})`} fillOpacity="0.88" />
+            <polygon points={poly} fill="none" stroke="#5a4326" strokeWidth="1.7" strokeOpacity="0.85" />
+          </g>
+        );
+      })}
+
+      {/* parchment grain over the washes */}
+      <rect
+        x={minX}
+        y={minY}
+        width={maxX - minX}
+        height={maxY - minY}
+        rx="14"
+        filter="url(#f-grain)"
+        pointerEvents="none"
+      />
+      <rect
+        x={minX}
+        y={minY}
+        width={maxX - minX}
+        height={maxY - minY}
+        rx="14"
+        filter="url(#f-blotch)"
+        pointerEvents="none"
+      />
+
+      {/* ink symbols, names and tokens */}
+      {state.board.hexes.map((h) => {
         const c = hexCenter(h.q, h.r);
         const info = TERRAIN_INFO[h.terrain];
-        const poly = corners.map((p) => `${p.x},${p.y}`).join(' ');
         return (
-          <g key={h.id}>
-            <polygon points={poly} fill={`url(#g-${h.terrain})`} stroke="#221a10" strokeWidth="3.5" />
-            <polygon points={poly} fill="none" stroke="rgba(255,236,190,0.10)" strokeWidth="1" />
+          <g key={`s${h.id}`}>
             {(MOTIFS[h.terrain] || []).map(([icon, dx, dy, s, color, op], i) => (
               <BoardIcon key={i} name={icon} x={c.x + dx} y={c.y + dy} s={s} color={color} opacity={op} />
             ))}
@@ -199,8 +260,8 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
               x={c.x}
               y={c.y - 24}
               textAnchor="middle"
-              fontSize="8"
-              fill="rgba(15,10,5,0.65)"
+              fontSize="8.5"
+              fill="#4f3b22"
               style={{ fontStyle: 'italic', letterSpacing: 0.4 }}
             >
               {info.name}
@@ -223,14 +284,14 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
         const y2 = b.y + (a.y - b.y) * shrink;
         return (
           <g key={eid} filter="url(#f-shadow)">
-            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#14100a" strokeWidth="9" strokeLinecap="round" />
+            <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#2c2014" strokeWidth="8.5" strokeLinecap="round" />
             <line
               x1={x1}
               y1={y1}
               x2={x2}
               y2={y2}
               stroke={state.players[pid].color}
-              strokeWidth="5.5"
+              strokeWidth="5"
               strokeLinecap="round"
             />
           </g>
@@ -250,12 +311,23 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
               y={v.y - 2}
               s={city ? 34 : 26}
               color={color}
-              stroke="#14100a"
+              stroke="#2c2014"
               strokeWidth={city ? 22 : 26}
             />
           </g>
         );
       })}
+
+      {/* aged edges */}
+      <rect
+        x={minX}
+        y={minY}
+        width={maxX - minX}
+        height={maxY - minY}
+        rx="14"
+        fill="url(#g-vignette)"
+        pointerEvents="none"
+      />
 
       {/* robber targets */}
       {robberMode &&
@@ -268,8 +340,8 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
               points={hexCorners(h.q, h.r)
                 .map((p) => `${p.x},${p.y}`)
                 .join(' ')}
-              fill="rgba(163,42,29,0.14)"
-              stroke="rgba(240,207,126,0.5)"
+              fill="rgba(156,42,24,0.16)"
+              stroke="rgba(122,74,14,0.6)"
               strokeWidth="1.5"
               strokeDasharray="5 4"
               onClick={() => dispatch({ type: 'MOVE_ROBBER', hexId: h.id })}
@@ -291,7 +363,7 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
             y2={b.y}
             strokeWidth="13"
             strokeLinecap="round"
-            stroke="rgba(240,207,126,0.3)"
+            stroke="rgba(122,74,14,0.4)"
             pointerEvents="all"
             onClick={() =>
               dispatch({
@@ -313,8 +385,8 @@ function Board({ state, geom, dispatch, clickableVerts, clickableEdges, robberMo
             cx={v.x}
             cy={v.y}
             r="9"
-            fill="rgba(240,207,126,0.5)"
-            stroke="#14100a"
+            fill="rgba(122,74,14,0.5)"
+            stroke="#2c2014"
             strokeWidth="1"
             onClick={() => {
               const type =
@@ -710,8 +782,8 @@ export default function Game() {
             <GIcon
               name="crown"
               size={64}
-              color="#e8c34a"
-              style={{ filter: 'drop-shadow(0 0 14px rgba(232,195,74,0.6))' }}
+              color="#a8821e"
+              style={{ filter: 'drop-shadow(0 0 14px rgba(168,130,30,0.7))' }}
             />
             <h2>{state.players[state.winner].name} unites Middle-earth!</h2>
             <p style={{ color: 'var(--muted)', marginBottom: 18 }}>
