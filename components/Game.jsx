@@ -448,6 +448,9 @@ export default function Game() {
   if (!state) {
     return (
       <div className="app">
+        <a className="back-link" href="/">
+          ⟵ The Hall of Games
+        </a>
         <Lobby
           onStart={(n) => {
             setState(newGame(n));
@@ -512,6 +515,9 @@ export default function Game() {
 
   return (
     <div className="app">
+      <a className="back-link" href="/">
+        ⟵ The Hall of Games
+      </a>
       <h1 className="title" style={{ fontSize: 22 }}>
         SETTLERS OF MIDDLE-EARTH
       </h1>

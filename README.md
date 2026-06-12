@@ -1,9 +1,17 @@
-# Settlers of Middle-earth 💍
+# Games of Middle-earth 💍
 
-A Lord of the Rings–themed, Catan-style settlement-building strategy game, playable in the
-browser as a hot-seat game for 2–4 players. Built with Next.js and deployed on Vercel.
+Fan-made Lord of the Rings–themed strategy board games, playable in the browser as hot-seat
+games for 2–4 players. Built with Next.js and deployed on Vercel.
 
-## How to play
+- **`/settlers` — Settlers of Middle-earth**: a Catan-style settlement-building game.
+- **`/war` — The War of the Ring**: a Risk-style world-conquest game across 36 territories
+  of Middle-earth in 7 realms. Muster armies (more for whole realms), trade banner cards for
+  escalating reinforcements, fight 3v2 dice battles (with blitz), make one fortifying march
+  per turn, and eliminate every rival. Mordor can only be entered by the Black Gate, the pass
+  of Minas Morgul, or out of the east — and the Corsair sea-routes link Umbar and Lindon to
+  Dol Amroth.
+
+## Settlers of Middle-earth — how to play
 
 - **Resources:** Timber 🌲 (Fangorn Forest), Clay 🧱 (Bree-land Hills), Fleece 🐑 (Shire
   Pastures), Grain 🌾 (Fields of the Pelennor), Mithril 💎 (Mines of Moria).
