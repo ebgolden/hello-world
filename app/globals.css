@@ -444,3 +444,14 @@ select {
   text-transform: uppercase;
   letter-spacing: 1.5px;
 }
+
+.handoff {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 30%, #2c1f15 0%, #140d08 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}

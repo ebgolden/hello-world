@@ -1,7 +1,7 @@
 # Games of Middle-earth 💍
 
 Fan-made Lord of the Rings–themed strategy board games, playable in the browser as hot-seat
-games for 2–4 players. Built with Next.js and deployed on Vercel.
+games. Built with Next.js and deployed on Vercel.
 
 - **`/settlers` — Settlers of Middle-earth**: a Catan-style settlement-building game.
 - **`/war` — The War of the Ring**: a Risk-style world-conquest game across 36 territories
@@ -10,6 +10,21 @@ games for 2–4 players. Built with Next.js and deployed on Vercel.
   per turn, and eliminate every rival. Mordor can only be entered by the Black Gate, the pass
   of Minas Morgul, or out of the east — and the Corsair sea-routes link Umbar and Lindon to
   Dol Amroth.
+- **`/shadow` — The Shadow Spreads**: a Pandemic-style cooperative game; cleanse the
+  corruption flowing from Mordor, Isengard, Dol Guldur and Angmar and banish all four Shadows.
+- **`/hunt` — The Hunt for the Ring**: a Stratego-style hidden-rank battle; find the enemy
+  Ring-bearer before yours is found.
+- **`/shire` — The Founding of the Shire**: a Carcassonne-style tile-layer; build lanes,
+  homesteads and inns and claim them with your hobbits.
+- **`/journeys` — There and Back Again**: a Ticket to Ride-style route builder across
+  Middle-earth; complete your secret journeys before the ponies run out.
+- **`/pelennor` — The Battle of the Pelennor**: chess between the Free Peoples and Mordor.
+- **`/council` — The Council of the Free Peoples**: a Diplomacy-style game of simultaneous
+  secret orders, supports, and betrayal.
+- **`/beacons` — The Beacon Hills**: a Battleship-style palantír duel over hidden mountain
+  encampments.
+- **`/leaves` — The Leaves of Lórien**: a Dominion-style deck-builder of allies, artifacts
+  and deeds.
 
 ## Settlers of Middle-earth — how to play
 
