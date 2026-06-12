@@ -167,6 +167,17 @@ export default function HuntGame() {
   }
 
   const onCell = (r, c) => {
+    if (state.phase === 'setup') {
+      const piece = state.board[r][c];
+      if (!piece || piece.p !== setupP) return;
+      if (sel) {
+        if (sel[0] === r && sel[1] === c) setSel(null);
+        else dispatch({ type: 'SWAP', p: setupP, a: sel, b: [r, c] });
+      } else {
+        setSel([r, c]);
+      }
+      return;
+    }
     if (state.phase !== 'play' || combat || state.winner !== null) return;
     const piece = state.board[r][c];
     if (targets.has(`${r},${c}`)) {
@@ -182,7 +193,7 @@ export default function HuntGame() {
 
   const prompt =
     state.phase === 'setup'
-      ? `${viewer.name}: your host is drawn up in secret. Redeploy until it pleases you, then stand ready.`
+      ? `${viewer.name}: arrange your host — tap two pieces to swap their posts, or redeploy at random. Then stand ready.`
       : state.phase === 'game-over'
         ? state.winner === null
           ? 'The hunt ends in stalemate.'
@@ -234,10 +245,12 @@ export default function HuntGame() {
                       (combat.from[0] === r && combat.from[1] === c));
                   const clickable =
                     !marsh &&
-                    state.phase === 'play' &&
-                    !combat &&
                     state.winner === null &&
-                    (isTarget || (piece && piece.p === viewerIdx));
+                    (state.phase === 'setup'
+                      ? piece && piece.p === setupP
+                      : state.phase === 'play' &&
+                        !combat &&
+                        (isTarget || (piece && piece.p === viewerIdx)));
                   let content = null;
                   if (marsh) {
                     content = <GIcon name="swamp" size={20} color="#5d6b42" style={{ opacity: 0.7 }} />;
